@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Yeski Pizza | Artisan Pizza • Obuasi</title>
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:wght@400;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * {
@@ -24,48 +24,59 @@
     :root {
       --red: #c41e3a;
       --red-dark: #a01830;
-      --orange: #ff6b00;
+      --red-light: #fff5f5;
       --white: #ffffff;
       --gray: #e0e0e0;
       --text-dark: #1a1a1a;
       --text-muted: #666666;
     }
 
-    /* ===== HAMBURGER MENU STYLES ===== */
+    /* ===== SMOOTH SCROLL BEHAVIOR (GLOBAL) ===== */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* ===== HAMBURGER MENU ===== */
     .hamburger {
       display: none;
       font-size: 1.8rem;
       cursor: pointer;
-      color: var(--orange);
-      background: none;
+      color: var(--red);
+      background: rgba(255,255,255,0.95);
       border: none;
       z-index: 1002;
       transition: all 0.3s ease;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
 
     .hamburger:hover {
-      color: var(--red);
+      background: var(--red);
+      color: white;
       transform: scale(1.05);
     }
 
     @media (max-width: 768px) {
       .hamburger {
-        display: block;
+        display: flex;
       }
       .nav-links {
         position: fixed;
         top: 0;
         left: -100%;
         width: 75%;
-        max-width: 300px;
+        max-width: 280px;
         height: 100vh;
-        background: rgba(0, 0, 0, 0.95);
-        backdrop-filter: blur(20px);
+        background: white;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 2px 0 30px rgba(0,0,0,0.3);
+        box-shadow: 2px 0 30px rgba(0,0,0,0.2);
         z-index: 1001;
         gap: 2rem;
         padding: 2rem;
@@ -76,8 +87,11 @@
       }
       .navbar {
         justify-content: space-between;
-        padding: 1rem 1.5rem;
-        width: 95%;
+        padding: 0.8rem 1.2rem;
+        width: 92%;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255,255,255,0.3);
       }
       .overlay {
         position: fixed;
@@ -88,7 +102,6 @@
         background: rgba(0,0,0,0.5);
         z-index: 1000;
         display: none;
-        backdrop-filter: blur(3px);
       }
       .overlay.open {
         display: block;
@@ -96,11 +109,14 @@
       .nav-links a {
         font-size: 1.2rem;
         padding: 0.5rem;
-        color: white;
+        color: var(--text-dark);
+      }
+      .nav-links a:hover {
+        color: var(--red);
       }
     }
 
-    /* ===== HERO SECTION WITH VIDEO BACKGROUND (LUXURY STYLE) ===== */
+    /* ===== HERO SECTION ===== */
     .hero {
       position: relative;
       height: 100vh;
@@ -119,11 +135,11 @@
     .hero-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.75));
+      background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.65));
       z-index: 1;
     }
 
-    /* NAVBAR - TRANSPARENT BLUR */
+    /* NAVBAR - GLASS/GLARE EFFECT */
     .navbar {
       position: absolute;
       top: 25px;
@@ -131,23 +147,43 @@
       transform: translateX(-50%);
       width: 90%;
       max-width: 1200px;
-      padding: 18px 35px;
+      padding: 15px 30px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(20px);
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(12px);
       border-radius: 60px;
       z-index: 100;
-      border: 1px solid rgba(255,255,255,0.1);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Liquid glare effect */
+    .navbar::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.5s ease;
+      border-radius: 60px;
+      pointer-events: none;
+    }
+
+    .navbar:hover::before {
+      left: 100%;
     }
 
     .logo {
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       font-weight: 800;
-      color: var(--orange);
+      color: white;
       font-family: 'Playfair Display', serif;
       text-decoration: none;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
 
     .nav-links {
@@ -159,13 +195,14 @@
     .nav-links a {
       text-decoration: none;
       color: white;
-      font-weight: 500;
+      font-weight: 600;
       transition: 0.3s;
       font-size: 0.95rem;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
     }
 
     .nav-links a:hover {
-      color: var(--orange);
+      color: var(--red);
     }
 
     /* HERO CONTENT */
@@ -187,15 +224,16 @@
       font-family: 'Playfair Display', serif;
       font-weight: 800;
       color: white;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
     }
 
     .hero-content h1 span {
-      color: var(--orange);
+      color: var(--red);
     }
 
     .hero-content p {
       font-size: 1.1rem;
-      color: #ddd;
+      color: #eee;
       margin-bottom: 35px;
       font-weight: 400;
     }
@@ -211,33 +249,36 @@
       padding: 15px 35px;
       border-radius: 50px;
       text-decoration: none;
-      font-weight: 600;
+      font-weight: 700;
       transition: 0.3s;
+      display: inline-block;
     }
 
     .btn-primary {
-      background: var(--orange);
+      background: var(--red);
       color: white;
+      box-shadow: 0 4px 15px rgba(196, 30, 58, 0.4);
     }
 
     .btn-primary:hover {
       transform: translateY(-5px);
-      background: #e05a00;
+      background: var(--red-dark);
     }
 
     .btn-secondary {
       border: 2px solid white;
       color: white;
       background: transparent;
+      backdrop-filter: blur(4px);
     }
 
     .btn-secondary:hover {
       background: white;
-      color: black;
+      color: var(--red);
       transform: translateY(-5px);
     }
 
-    /* MAIN CONTENT SECTIONS */
+    /* MAIN CONTENT */
     .main-container {
       max-width: 1400px;
       margin: 0 auto;
@@ -245,10 +286,10 @@
     }
 
     /* MENU SLIDER */
-    .menu-showcase { padding: 5rem 0; background: #fffcfc; }
+    .menu-showcase { padding: 5rem 0; background: var(--red-light); }
     .section-header { text-align: center; margin-bottom: 3rem; }
     .section-header h2 { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 700; color: var(--text-dark); }
-    .section-header h2 span { color: var(--orange); border-bottom: 3px solid var(--orange); display: inline-block; padding-bottom: 6px; }
+    .section-header h2 span { color: var(--red); border-bottom: 3px solid var(--red); display: inline-block; padding-bottom: 6px; }
     .section-header p { color: var(--text-muted); margin-top: 12px; }
     .slider-premium { max-width: 1100px; margin: 0 auto; }
     .slider-container { position: relative; border-radius: 36px; overflow: hidden; background: #f2ece4; aspect-ratio: 16 / 9; max-height: 420px; width: 100%; box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.25); }
@@ -264,38 +305,78 @@
     .slide-img.pizza-7 { background: radial-gradient(ellipse 70% 55% at 50% 45%, #b07828, #885818 40%, #482808); }
     .wood-board { position: absolute; bottom: 12%; left: 50%; transform: translateX(-50%); width: 74%; height: 26%; background: linear-gradient(145deg, #9a6030, #7a4820, #8a5828); border-radius: 18px 18px 12px 12px; box-shadow: 0 12px 22px rgba(0, 0, 0, 0.35); z-index: 1; }
     .pizza-svg-wrap { position: absolute; width: 70%; max-width: 280px; aspect-ratio: 1; top: 50%; left: 50%; transform: translate(-50%, -52%); filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.4)); z-index: 2; pointer-events: none; }
-    .slide-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 60px; background: rgba(255, 255, 255, 0.96); border: none; cursor: pointer; font-size: 28px; color: var(--orange); z-index: 15; transition: all 0.2s; }
-    .slide-nav:hover { background: var(--orange); color: white; }
+    .slide-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 60px; background: rgba(255, 255, 255, 0.96); border: none; cursor: pointer; font-size: 28px; color: var(--red); z-index: 15; transition: all 0.2s; }
+    .slide-nav:hover { background: var(--red); color: white; }
     .slide-nav.prev { left: 16px; } .slide-nav.next { right: 16px; }
     .menu-info { padding: 28px 12px 12px; text-align: center; }
-    .pizza-name { font-size: clamp(26px, 3.5vw, 38px); font-weight: 800; font-style: italic; color: var(--orange); font-family: 'Playfair Display', serif; margin-bottom: 8px; }
+    .pizza-name { font-size: clamp(26px, 3.5vw, 38px); font-weight: 800; font-style: italic; color: var(--red); font-family: 'Playfair Display', serif; margin-bottom: 8px; }
     .pizza-tagline { font-size: 1rem; font-weight: 600; color: #b45f1b; margin-bottom: 10px; letter-spacing: 0.5px; }
-    .pizza-desc { font-size: clamp(13px, 1.2vw, 16px); color: #2c2c26; max-width: 680px; margin: 0 auto 16px auto; line-height: 1.6; }
-    .dots-row { display: flex; justify-content: center; gap: 10px; margin-top: 8px; }
+    .pizza-desc { font-size: clamp(13px, 1.2vw, 16px); color: #2c2c26; max-width: 680px; margin: 0 auto 20px auto; line-height: 1.6; }
+    
+    /* REDESIGNED ORDER NOW BOX */
+    .order-now-box {
+      background: var(--red);
+      border-radius: 60px;
+      padding: 12px 32px;
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 20px rgba(196, 30, 58, 0.3);
+      border: none;
+      margin-top: 10px;
+    }
+    .order-now-box:hover {
+      transform: translateY(-3px);
+      background: var(--red-dark);
+      box-shadow: 0 12px 28px rgba(196, 30, 58, 0.4);
+    }
+    .order-now-box span {
+      color: white;
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: 1.5px;
+    }
+    .order-now-box i {
+      color: white;
+      font-size: 1.2rem;
+    }
+    
+    .dots-row { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
     .dot { width: 10px; height: 10px; border-radius: 50%; background: #ccc; border: none; cursor: pointer; transition: all 0.3s; }
-    .dot.active { background: var(--orange); width: 28px; border-radius: 6px; }
+    .dot.active { background: var(--red); width: 28px; border-radius: 6px; }
 
     /* MAP SECTION */
-    .map-section { padding: 5rem 0; background: linear-gradient(135deg, #faf7f5 0%, #fff5f0 100%); text-align: center; }
-    .map-container { max-width: 1100px; margin: 0 auto; border-radius: 32px; overflow: hidden; box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.2); border: 4px solid white; background: #e9e9e9; min-height: 300px; display: flex; align-items: center; justify-content: center; }
+    .map-section { padding: 5rem 0; background: white; text-align: center; }
+    .map-container { max-width: 1100px; margin: 0 auto; border-radius: 32px; overflow: hidden; box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.2); border: 4px solid var(--red); background: #e9e9e9; min-height: 300px; display: flex; align-items: center; justify-content: center; }
     .map-placeholder { padding: 3rem; text-align: center; color: #666; font-weight: 500; background: #f5f5f5; width: 100%; }
-    .map-placeholder i { font-size: 3rem; color: var(--orange); margin-bottom: 1rem; display: block; }
+    .map-placeholder i { font-size: 3rem; color: var(--red); margin-bottom: 1rem; display: block; }
     .address-info { margin-top: 1.5rem; display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
-    .address-card { background: white; padding: 1rem 2rem; border-radius: 60px; display: inline-flex; align-items: center; gap: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    .address-card { background: var(--red-light); padding: 1rem 2rem; border-radius: 60px; display: inline-flex; align-items: center; gap: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: 1px solid var(--red); }
+    .address-card i { color: var(--red); }
 
-    /* REVIEWS SECTION */
+    /* REVIEWS SECTION - ORIGINAL COLORS */
     .reviews-section { background: #fff; padding: 5rem 0; text-align: center; }
-    .section-title { font-size: clamp(28px, 4vw, 44px); font-weight: 800; color: var(--orange); font-family: 'Playfair Display', serif; }
+    .section-title { font-size: clamp(28px, 4vw, 44px); font-weight: 800; color: #c41e3a; font-family: 'Playfair Display', serif; }
     .rating-row { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 48px; }
     .star { font-size: 28px; color: #f5b81b; }
     .slider-wrapper { position: relative; display: flex; align-items: center; max-width: 1300px; margin: 0 auto; padding: 0 20px; }
     .review-nav-btn { width: 48px; height: 48px; border-radius: 50%; border: 1px solid #ddd; background: #fff; cursor: pointer; font-size: 24px; transition: all 0.2s; }
-    .review-nav-btn:hover { border-color: var(--orange); color: var(--orange); }
+    .review-nav-btn:hover { border-color: #c41e3a; color: #c41e3a; background: #fff0f0; }
     .slider-viewport { flex: 1; overflow: hidden; margin: 0 14px; }
     .slider-track { display: flex; gap: 24px; transition: transform 0.45s ease; }
     .review-card { flex: 0 0 calc((100% - 72px) / 4); border-radius: 28px; padding: 24px; min-height: 340px; }
-    .avatar-wrap { width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 12px; overflow: hidden; background: #2c2c2c; display: flex; align-items: center; justify-content: center; }
-    .man-silhouette { width: 100%; height: 100%; background: #1a1a1a; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+    .review-card.red    { background: #c41e3a; }
+    .review-card.green  { background: #3a9e4a; }
+    .review-card.yellow { background: #c9a800; }
+    .review-card.grey   { background: #5a5a5a; }
+    .review-card.orange { background: #f07c00; }
+    .review-card.teal   { background: #1a8c8c; }
+    .review-card.navy   { background: #1e3a6e; }
+    .review-card.purple { background: #6e3a8c; }
+    .avatar-wrap { width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 12px; overflow: hidden; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; border: 2px solid rgba(255,255,255,0.5); }
+    .man-silhouette { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
     .card-quote { font-size: 14px; color: white; margin: 12px 0; text-align: left; line-height: 1.5; font-weight: 500; }
     .card-handle { font-weight: 800; color: white; display: block; }
     .card-platform { font-size: 11px; color: rgba(255,255,255,0.8); margin-top: 4px; }
@@ -332,7 +413,7 @@
       color: #666;
       transition: color 0.2s;
     }
-    .close-modal:hover { color: var(--orange); }
+    .close-modal:hover { color: var(--red); }
     .cart-item {
       display: flex;
       justify-content: space-between;
@@ -341,8 +422,8 @@
       border-bottom: 1px solid #eee;
     }
     .cart-controls button {
-      background: #f0f0f0;
-      border: none;
+      background: var(--red-light);
+      border: 1px solid var(--red);
       width: 30px;
       height: 30px;
       border-radius: 50%;
@@ -350,8 +431,9 @@
       cursor: pointer;
       margin: 0 5px;
       transition: all 0.2s;
+      color: var(--red);
     }
-    .cart-controls button:hover { background: #ddd; }
+    .cart-controls button:hover { background: var(--red); color: white; }
     .order-form input, .order-form textarea {
       width: 100%;
       padding: 12px;
@@ -361,13 +443,13 @@
       font-family: inherit;
     }
 
-    /* PERSISTENT ORDER NOW BUTTON - BOTTOM CENTER */
+    /* PERSISTENT ORDER BUTTON */
     .floating-order-btn {
       position: fixed;
       bottom: 25px;
       left: 50%;
       transform: translateX(-50%);
-      background: linear-gradient(135deg, #ff6b00 0%, #e05a00 100%);
+      background: var(--red);
       color: white;
       padding: 16px 40px;
       border-radius: 60px;
@@ -381,48 +463,35 @@
       justify-content: center;
       gap: 12px;
       cursor: pointer;
-      box-shadow: 0 10px 30px rgba(255, 107, 0, 0.5), 0 0 0 2px rgba(255,255,255,0.2);
+      box-shadow: 0 10px 30px rgba(196, 30, 58, 0.5);
       transition: all 0.3s ease;
       border: none;
       font-family: 'Montserrat', sans-serif;
       white-space: nowrap;
     }
-
-    .floating-order-btn:hover {
-      transform: translateX(-50%) scale(1.05);
-      background: linear-gradient(135deg, #ff7a1a 0%, #ff5500 100%);
-      box-shadow: 0 15px 35px rgba(255, 107, 0, 0.6);
-    }
-
-    .floating-order-btn:active {
-      transform: translateX(-50%) scale(0.98);
-    }
-
-    .floating-order-btn i {
-      font-size: 1.3rem;
-    }
+    .floating-order-btn:hover { transform: translateX(-50%) scale(1.05); background: var(--red-dark); }
 
     /* Footer */
-    .footer { background: #0a0a0a; color: white; padding: 3rem 2rem 1.5rem; margin-top: 2rem; }
+    .footer { background: var(--red-dark); color: white; padding: 3rem 2rem 1.5rem; margin-top: 2rem; }
     .footer-container { max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between; }
-    .footer-col h4 { font-family: 'Playfair Display', serif; margin-bottom: 1rem; color: var(--orange); }
-    .footer-col a, .footer-col p { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.85rem; line-height: 1.8; display: block; }
-    .footer-col a:hover { color: var(--orange); }
-    .footer-bottom { text-align: center; padding-top: 2rem; margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.75rem; }
+    .footer-col h4 { font-family: 'Playfair Display', serif; margin-bottom: 1rem; color: white; }
+    .footer-col a, .footer-col p { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; line-height: 1.8; display: block; }
+    .footer-col a:hover { color: white; }
+    .footer-bottom { text-align: center; padding-top: 2rem; margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.2); font-size: 0.75rem; }
 
     @media (max-width: 900px) { .review-card { flex: 0 0 calc((100% - 24px) / 2); } }
     @media (max-width: 560px) { 
       .review-card { flex: 0 0 100%; }
-      .floating-order-btn { padding: 12px 24px; font-size: 0.9rem; bottom: 20px; }
+      .floating-order-btn { padding: 12px 24px; font-size: 0.9rem; }
       .hero-content h1 { font-size: 2.8rem; }
-      .navbar { padding: 12px 20px; }
-      .logo { font-size: 1.3rem; }
+      .navbar { padding: 10px 18px; }
+      .logo { font-size: 1.3rem; color: white; }
     }
   </style>
 </head>
 <body>
 
-<!-- HERO SECTION WITH VIDEO - LUXURY HEADER STYLE -->
+<!-- HERO SECTION -->
 <header class="hero" id="home">
   <video autoplay muted loop playsinline>
     <source src="video.mp4" type="video/mp4">
@@ -461,7 +530,11 @@
           <div class="pizza-name" id="pizzaName">The Dukeman</div>
           <div class="pizza-tagline" id="pizzaTagline">Beef, Sausage, Bacon, Onions</div>
           <p class="pizza-desc" id="pizzaDesc">Rich, meaty, and impossibly satisfying. Piled high with premium beef, smoky sausage, crispy bacon, and caramelized onions over a robust tomato base.</p>
-          <button id="orderFromMenuBtn" class="btn-primary" style="margin-bottom:1rem;">ORDER NOW →</button>
+          <div class="order-now-box" id="orderFromMenuBtn">
+            <i class="fas fa-shopping-bag"></i>
+            <span>ORDER NOW</span>
+            <i class="fas fa-arrow-right"></i>
+          </div>
           <div class="dots-row" id="dotsRow"></div>
         </div>
       </div>
@@ -485,7 +558,7 @@
   <div id="orderModal" class="order-modal">
     <div class="modal-content">
       <span class="close-modal" id="closeModalBtn">&times;</span>
-      <h2 style="color:var(--orange); margin-bottom:1rem;">Your Order</h2>
+      <h2 style="color:var(--red); margin-bottom:1rem;">Your Order</h2>
       <div id="cartItemsList"></div>
       <div style="text-align:right; font-weight:800; margin:1rem 0; font-size:1.2rem;" id="cartTotal">Total: GHS 0</div>
       <hr style="margin:1rem 0;">
@@ -512,7 +585,6 @@
 </button>
 
 <script>
-  // PIZZA DATA
   const menuItems = [
     { id: 0, name: "The Dukeman", tagline: "Beef, Sausage, Bacon, Onions", price: 75, desc: "Rich, meaty, and impossibly satisfying. Piled high with premium beef, smoky sausage, crispy bacon, and caramelized onions over a robust tomato base." },
     { id: 1, name: "The Pepperoni Royale", tagline: "Premium Pepperoni, Mozzarella", price: 70, desc: "Wall-to-wall premium pepperoni slices curled to crispy perfection over melted mozzarella on Yeski's signature sauce." },
@@ -534,25 +606,63 @@
     const dot = document.createElement('button'); dot.className = 'dot' + (idx===0?' active':''); dot.onclick = () => goToSlide(idx);
     dotsRow.appendChild(dot);
   });
-  function goToSlide(i) { currentSlide = i; updateSlider(); }
-  function updateSlider() { slidesWrap.style.transform = `translateX(-${currentSlide*100}%)`; document.querySelectorAll('.dot').forEach((d,i)=>d.className='dot'+(i===currentSlide?' active':'')); const item = menuItems[currentSlide]; pizzaNameSpan.innerText = item.name; pizzaTaglineSpan.innerText = item.tagline; pizzaDescSpan.innerText = item.desc; }
+  
+  function goToSlide(i) { 
+    currentSlide = i; 
+    updateSlider(); 
+  }
+  
+  function updateSlider() { 
+    slidesWrap.style.transform = `translateX(-${currentSlide*100}%)`; 
+    document.querySelectorAll('.dot').forEach((d,i)=>d.className='dot'+(i===currentSlide?' active':''));
+    const item = menuItems[currentSlide];
+    pizzaNameSpan.innerText = item.name;
+    pizzaTaglineSpan.innerText = item.tagline;
+    pizzaDescSpan.innerText = item.desc;
+  }
+  
+  // Manual navigation
   document.getElementById('prevBtn').onclick = () => goToSlide((currentSlide-1+menuItems.length)%menuItems.length);
   document.getElementById('nextBtn').onclick = () => goToSlide((currentSlide+1)%menuItems.length);
   updateSlider();
   
+  // AUTO SLIDE EVERY 4 SECONDS
+  let autoSlideInterval = setInterval(() => {
+    goToSlide((currentSlide + 1) % menuItems.length);
+  }, 4000);
+  
+  // Pause auto-slide on hover, resume on leave
+  const sliderContainer = document.querySelector('.slider-container');
+  sliderContainer.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
+  sliderContainer.addEventListener('mouseleave', () => {
+    autoSlideInterval = setInterval(() => {
+      goToSlide((currentSlide + 1) % menuItems.length);
+    }, 4000);
+  });
+  
+  // Cart functions
   function addToCart(id) { const item = menuItems.find(i=>i.id===id); const ex = cart.find(i=>i.id===id); ex ? ex.quantity++ : cart.push({...item, quantity:1}); renderCart(); }
   function removeItem(id) { cart = cart.filter(i=>i.id!==id); renderCart(); }
   function updateQty(id, delta) { const idx = cart.findIndex(i=>i.id===id); if(idx!==-1) { cart[idx].quantity += delta; if(cart[idx].quantity<=0) cart.splice(idx,1); } renderCart(); }
-  function renderCart() { const c = document.getElementById('cartItemsList'); if(!c) return; if(cart.length===0) { c.innerHTML='<p style="color:#666;">Your cart is empty.</p>'; document.getElementById('cartTotal').innerText='Total: GHS 0'; return; } let html='', total=0; cart.forEach(i=>{ total+=i.price*i.quantity; html+=`<div class="cart-item"><div><strong>${i.name}</strong><br>GHS ${i.price}</div><div><button onclick="updateQty(${i.id},-1)">-</button> ${i.quantity} <button onclick="updateQty(${i.id},1)">+</button> <button onclick="removeItem(${i.id})">🗑️</button></div></div>`; }); c.innerHTML=html; document.getElementById('cartTotal').innerText=`Total: GHS ${total}`; }
+  function renderCart() { const c = document.getElementById('cartItemsList'); if(!c) return; if(cart.length===0) { c.innerHTML='<p style="color:#666;">Your cart is empty.</p>'; document.getElementById('cartTotal').innerText='Total: GHS 0'; return; } let html='', total=0; cart.forEach(i=>{ total+=i.price*i.quantity; html+=`<div class="cart-item"><div><strong>${i.name}</strong><br>GHS ${i.price}</div><div class="cart-controls"><button onclick="updateQty(${i.id},-1)">-</button> ${i.quantity} <button onclick="updateQty(${i.id},1)">+</button> <button onclick="removeItem(${i.id})">🗑️</button></div></div>`; }); c.innerHTML=html; document.getElementById('cartTotal').innerText=`Total: GHS ${total}`; }
   function sendOrder() { const name = document.getElementById('customerName')?.value.trim(), loc = document.getElementById('customerLocation')?.value.trim(), special = document.getElementById('specialInstructions')?.value.trim(); if(!name||!loc) { alert("Please enter name and address."); return false; } if(cart.length===0) { alert("Cart is empty."); return false; } let msg = "YESKI PIZZA ORDER\n\n"; msg += `Name: ${name}\nLocation: ${loc}\nNotes: ${special||"None"}\n\n`; let total=0; cart.forEach(i=>{ msg+=`${i.name} x${i.quantity} = GHS ${i.price*i.quantity}\n`; total+=i.price*i.quantity; }); msg+=`\nTOTAL: GHS ${total}`; window.open(`https://wa.me/233595590891?text=${encodeURIComponent(msg)}`,'_blank'); return true; }
   const modal = document.getElementById('orderModal'); document.querySelectorAll('#orderNavBtn, #orderFromMenuBtn, #floatingCartBtn').forEach(btn=>btn?.addEventListener('click',(e)=>{ e.preventDefault(); renderCart(); modal.style.display='flex'; })); document.getElementById('closeModalBtn')?.addEventListener('click',()=>modal.style.display='none'); window.onclick = e => { if(e.target===modal) modal.style.display='none'; }; document.getElementById('submitOrderBtn')?.addEventListener('click',(e)=>{ e.preventDefault(); if(sendOrder()) { modal.style.display='none'; cart=[]; renderCart(); } });
-  document.getElementById('orderFromMenuBtn')?.addEventListener('click',()=>{ addToCart(menuItems[currentSlide].id); alert(`${menuItems[currentSlide].name} added.`); });
+  document.getElementById('orderFromMenuBtn')?.addEventListener('click',()=>{ addToCart(menuItems[currentSlide].id); alert(`${menuItems[currentSlide].name} added to your order.`); });
   window.addToCart=addToCart; window.removeItem=removeItem; window.updateQty=updateQty;
   
   // Reviews
-  const reviewData = [{quote:"The pizza was amazing. Pepperoni Beef one oo.",handle:"@erickambozie",platform:"X",color:"#c41e3a"},{quote:"Yeski Pizza really no dey play with toppings!",handle:"@Nana Poku",platform:"TikTok",color:"#3a9e4a"},{quote:"Yeski Pizza on top!",handle:"@princethug89",platform:"TikTok",color:"#c9a800"},{quote:"Double Chicken Barbecue tastes soo good.",handle:"@rajways99",platform:"TikTok",color:"#5a5a5a"},{quote:"Best pizza in town!",handle:"@Ahmed Mustapha",platform:"Instagram",color:"#f07c00"},{quote:"Pepperoni had me going back.",handle:"@Rashid Yemo",platform:"X",color:"#1a8c8c"},{quote:"Whole family loved it.",handle:"@blueway73",platform:"Facebook",color:"#1e3a6e"},{quote:"BBQ chicken pizza is 10/10.",handle:"@altims88",platform:"TikTok",color:"#6e3a8c"}];
+  const reviewData = [
+    { quote: "The pizza sold at Yeski Pizza was served at the last supper. Pepperoni Beef one oo!", handle: "@erickambozie", platform: "Via X", color: "red" },
+    { quote: "The meatza be loaded waa, Yeski Pizza really no dey play with toppings!", handle: "@Nana Poku", platform: "Via TikTok", color: "green" },
+    { quote: "The meatza pizza anumde foc! Yeski Pizza on top!", handle: "@princethug89", platform: "Via TikTok", color: "yellow" },
+    { quote: "Still enjoying my Double Chicken Barbecue pizza, tastes soo good!", handle: "@rajways99", platform: "Via TikTok", color: "grey" },
+    { quote: "Yeski Pizza chicken pizza is absolutely fire! Best in town!", handle: "@Ahmed Mustapha", platform: "Via Instagram", color: "orange" },
+    { quote: "Visited Yeski Pizza last weekend. Pepperoni had me going back!", handle: "@Rashid Yemo", platform: "Via X", color: "teal" },
+    { quote: "Yeski Pizza never disappoints. Whole family loved it!", handle: "@blueway73", platform: "Via Facebook", color: "navy" },
+    { quote: "BBQ chicken pizza from Yeski is everything! 10/10!", handle: "@altims88", platform: "Via TikTok", color: "purple" }
+  ];
   const track = document.getElementById('reviewTrack'); let revCurr=0, vis=4;
-  function buildReviews() { track.innerHTML=''; reviewData.forEach(r=>{ const card = document.createElement('div'); card.className='review-card'; card.style.background=r.color; card.innerHTML=`<div class="avatar-wrap"><div class="man-silhouette"><i class="fas fa-user-circle" style="font-size:3rem;color:#555;"></i></div></div><p class="card-quote">${r.quote}</p><div><span class="card-handle">${r.handle}</span><span class="card-platform">${r.platform}</span></div>`; track.appendChild(card); }); }
+  function buildReviews() { track.innerHTML=''; reviewData.forEach(r=>{ const card = document.createElement('div'); card.className=`review-card ${r.color}`; card.innerHTML=`<div class="avatar-wrap"><div class="man-silhouette"><i class="fas fa-user-circle" style="font-size:3rem;color:rgba(255,255,255,0.8);"></i></div></div><p class="card-quote">${r.quote}</p><div><span class="card-handle">${r.handle}</span><span class="card-platform">${r.platform}</span></div>`; track.appendChild(card); }); }
   function getVis(){ return window.innerWidth<=560?1:window.innerWidth<=900?2:4; }
   function renderRev(){ track.style.transform=`translateX(-${revCurr * (track.parentElement.clientWidth/vis + 24)}px)`; document.querySelectorAll('#reviewDots .review-dot')?.forEach((d,i)=>d.className='review-dot'+(i===revCurr?' active':'')); }
   function updateDots(){ const dC=document.getElementById('reviewDots'); if(!dC) return; dC.innerHTML=''; for(let i=0;i<=reviewData.length-vis;i++){ const d=document.createElement('button'); d.className='review-dot'+(i===revCurr?' active':''); d.onclick=()=>{ revCurr=i; renderRev(); }; dC.appendChild(d); } }
@@ -562,12 +672,26 @@
   buildReviews(); vis=getVis(); updateDots(); setTimeout(renderRev,50);
   
   // Hamburger
-  const hamburger = document.getElementById('hamburgerBtn'), navLinks = document.getElementById('navLinks'), overlayDiv = document.getElementById('overlay') || document.createElement('div');
-  if(!document.getElementById('overlay')){ const ov=document.createElement('div'); ov.id='overlay'; ov.className='overlay'; document.body.appendChild(ov); overlayDiv.id='overlay'; }
-  const overlay = document.getElementById('overlay');
+  const hamburger = document.getElementById('hamburgerBtn'), navLinks = document.getElementById('navLinks');
+  let overlay = document.getElementById('overlay');
+  if(!overlay){ const ov=document.createElement('div'); ov.id='overlay'; ov.className='overlay'; document.body.appendChild(ov); overlay=ov; }
   hamburger?.addEventListener('click',()=>{ navLinks.classList.toggle('open'); overlay.classList.toggle('open'); });
   overlay?.addEventListener('click',()=>{ navLinks.classList.remove('open'); overlay.classList.remove('open'); });
   document.querySelectorAll('.nav-links a').forEach(link=>{ link.addEventListener('click',()=>{ navLinks.classList.remove('open'); overlay.classList.remove('open'); }); });
+  
+  // Additional smooth scroll fix for all anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if(targetId && targetId !== '#' && targetId !== '#menu-section' && targetId !== '#reviews' && targetId !== '#map' && targetId !== '#home') {
+        const target = document.querySelector(targetId);
+        if(target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    });
+  });
 </script>
 </body>
 </html>
