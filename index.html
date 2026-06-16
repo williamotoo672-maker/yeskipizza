@@ -23,8 +23,6 @@
       --red: #c41e3a;
       --red-dark: #a01830;
       --red-light: #fff5f5;
-      --green: #25D366;
-      --green-dark: #128C7E;
     }
 
     html {
@@ -327,7 +325,7 @@
     .review-dot { width: 10px; height: 10px; border-radius: 50%; background: #ccc; cursor: pointer; }
     .review-dot.active { background: #1a1a1a; width: 28px; border-radius: 6px; }
 
-    /* ===== MODERN ORDER MODAL ===== */
+    /* MODERN ORDER MODAL */
     .order-modal {
       display: none;
       position: fixed;
@@ -340,43 +338,50 @@
       z-index: 2000;
       justify-content: center;
       align-items: center;
-      animation: fadeIn 0.3s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
+      padding: 20px;
     }
 
     .modal-content {
       background: white;
-      max-width: 650px;
-      width: 95%;
+      max-width: 680px;
+      width: 100%;
       max-height: 92vh;
-      border-radius: 28px;
-      padding: 2.5rem;
+      border-radius: 32px;
+      padding: 2rem;
       overflow-y: auto;
       position: relative;
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+      animation: modalSlideIn 0.3s ease;
     }
 
-    .modal-content::-webkit-scrollbar {
-      width: 6px;
+    @keyframes modalSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
-    .modal-content::-webkit-scrollbar-track {
-      background: #f1f1f1;
-      border-radius: 10px;
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--red-light);
     }
-    .modal-content::-webkit-scrollbar-thumb {
-      background: var(--red);
-      border-radius: 10px;
+
+    .modal-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--red);
     }
 
     .close-modal {
-      position: absolute;
-      top: 1.2rem;
-      right: 1.5rem;
-      font-size: 1.6rem;
+      font-size: 2rem;
       cursor: pointer;
       color: #999;
       transition: 0.3s;
@@ -386,55 +391,40 @@
       align-items: center;
       justify-content: center;
       border-radius: 50%;
-      background: #f5f5f5;
     }
+
     .close-modal:hover {
       color: var(--red);
       background: var(--red-light);
-      transform: rotate(90deg);
     }
 
-    .modal-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 1.5rem;
-      padding-bottom: 1rem;
-      border-bottom: 2px solid #f0f0f0;
-    }
-
-    .modal-header h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      color: var(--red);
-      margin: 0;
-    }
-
-    .modal-header i {
-      font-size: 1.8rem;
-      color: var(--red);
-    }
-
-    .cart-empty {
+    /* Empty cart */
+    .empty-cart {
       text-align: center;
       padding: 2rem 0;
       color: #999;
     }
-
-    .cart-empty i {
+    .empty-cart i {
       font-size: 3rem;
       color: #ddd;
       margin-bottom: 1rem;
       display: block;
     }
 
+    /* Cart items */
+    .cart-items-list {
+      max-height: 250px;
+      overflow-y: auto;
+      margin-bottom: 1rem;
+    }
+
     .cart-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0.8rem 0;
+      padding: 12px 0;
       border-bottom: 1px solid #f0f0f0;
-      animation: slideIn 0.3s ease;
+      animation: slideIn 0.2s ease;
     }
 
     @keyframes slideIn {
@@ -452,15 +442,14 @@
     }
     .cart-item-details .item-size {
       font-size: 0.8rem;
-      color: #888;
-      font-weight: 500;
+      color: var(--red);
+      font-weight: 600;
       display: block;
-      margin-top: 2px;
     }
     .cart-item-details .item-price {
-      font-weight: 600;
-      color: var(--red);
-      font-size: 0.9rem;
+      font-size: 0.85rem;
+      color: #666;
+      font-weight: 500;
     }
 
     .cart-controls {
@@ -469,126 +458,140 @@
       gap: 6px;
     }
     .cart-controls button {
-      background: #f5f5f5;
-      border: none;
       width: 32px;
       height: 32px;
       border-radius: 50%;
+      border: 1px solid #ddd;
+      background: white;
       cursor: pointer;
       font-weight: 700;
-      color: #333;
-      transition: 0.3s;
       font-size: 1rem;
+      transition: 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .cart-controls button:hover {
       background: var(--red);
       color: white;
+      border-color: var(--red);
     }
-    .cart-controls .qty-num {
+    .cart-controls .qty {
       font-weight: 700;
       min-width: 24px;
       text-align: center;
-      font-size: 1rem;
     }
     .cart-controls .remove-btn {
-      background: #fff0f0;
-      color: #ff6b6b;
-      margin-left: 4px;
+      background: none;
+      border: none;
+      color: #ccc;
+      font-size: 1.1rem;
+      width: 32px;
     }
     .cart-controls .remove-btn:hover {
-      background: #ff6b6b;
-      color: white;
+      color: var(--red);
+      background: none;
     }
 
+    /* Cart total */
     .cart-total {
-      text-align: right;
-      font-weight: 800;
-      font-size: 1.3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       padding: 1rem 0;
-      border-top: 2px solid #f0f0f0;
+      border-top: 2px solid var(--red-light);
       margin-top: 0.5rem;
     }
-    .cart-total span {
+    .cart-total .total-label {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #1a1a1a;
+    }
+    .cart-total .total-amount {
+      font-size: 1.4rem;
+      font-weight: 800;
       color: var(--red);
     }
 
-    /* Size Selector */
+    /* Size Selector - Modern Card Style */
     .size-selector-label {
       font-weight: 600;
-      margin: 1.5rem 0 0.8rem 0;
+      font-size: 0.95rem;
       color: #1a1a1a;
-      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      display: block;
     }
 
     .size-selector {
       display: flex;
-      gap: 12px;
+      gap: 10px;
+      margin: 10px 0 16px 0;
       flex-wrap: wrap;
     }
 
     .size-option {
       flex: 1;
       min-width: 80px;
-      padding: 14px 20px;
-      border: 2px solid #e0e0e0;
+      padding: 14px 18px;
+      border: 2px solid #e8e8e8;
       border-radius: 16px;
       text-align: center;
       cursor: pointer;
       transition: all 0.3s ease;
       background: #fafafa;
+      position: relative;
     }
+
     .size-option:hover {
       border-color: var(--red);
       background: var(--red-light);
       transform: translateY(-2px);
     }
+
     .size-option.active {
       border-color: var(--red);
       background: var(--red);
       color: white;
-      box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(196, 30, 58, 0.25);
     }
+
     .size-option .size-label {
       font-weight: 700;
+      font-size: 0.95rem;
       display: block;
-      font-size: 1rem;
     }
+
     .size-option .size-price {
       display: block;
       font-size: 0.85rem;
       font-weight: 500;
       margin-top: 4px;
-      color: #888;
+      color: #666;
     }
+
     .size-option.active .size-price {
       color: rgba(255, 255, 255, 0.85);
     }
 
-    /* Modern Form */
-    .order-form {
-      margin-top: 1.2rem;
-    }
-
-    .order-form .form-group {
-      margin-bottom: 1rem;
-    }
-
-    .order-form label {
-      display: block;
+    /* Delivery Details Form */
+    .form-section-title {
       font-weight: 600;
-      font-size: 0.9rem;
-      color: #333;
-      margin-bottom: 6px;
+      font-size: 0.95rem;
+      color: #1a1a1a;
+      margin: 1.2rem 0 0.5rem 0;
+      display: block;
     }
 
     .order-form input,
     .order-form textarea {
       width: 100%;
       padding: 14px 18px;
+      margin: 6px 0;
       border: 2px solid #e8e8e8;
-      border-radius: 14px;
-      font-family: 'Inter', sans-serif;
-      font-size: 1rem;
+      border-radius: 16px;
+      font-family: inherit;
+      font-size: 0.95rem;
       transition: 0.3s;
       background: #fafafa;
     }
@@ -598,57 +601,45 @@
       outline: none;
       border-color: var(--red);
       background: white;
-      box-shadow: 0 0 0 4px rgba(196, 30, 58, 0.1);
+      box-shadow: 0 0 0 4px rgba(196, 30, 58, 0.08);
     }
 
     .order-form textarea {
       resize: vertical;
-      min-height: 80px;
+      min-height: 70px;
     }
 
-    /* Modern WhatsApp Button */
-    .btn-whatsapp {
+    /* Send Order Button - Modern */
+    .submit-order-btn {
       width: 100%;
-      padding: 16px 30px;
-      background: var(--green);
+      padding: 16px;
+      margin-top: 1rem;
+      background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
       color: white;
       border: none;
-      border-radius: 16px;
-      font-weight: 700;
+      border-radius: 60px;
       font-size: 1.1rem;
+      font-weight: 700;
       cursor: pointer;
       transition: all 0.3s ease;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 14px;
-      font-family: 'Inter', sans-serif;
-      margin-top: 0.5rem;
-      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+      gap: 12px;
+      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
     }
 
-    .btn-whatsapp:hover {
+    .submit-order-btn:hover {
       transform: translateY(-3px);
-      background: var(--green-dark);
-      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+      box-shadow: 0 12px 30px rgba(37, 211, 102, 0.4);
     }
 
-    .btn-whatsapp:active {
-      transform: translateY(0);
+    .submit-order-btn:active {
+      transform: scale(0.98);
     }
 
-    .btn-whatsapp i {
-      font-size: 1.4rem;
-    }
-
-    .btn-whatsapp .wa-text {
-      font-weight: 700;
-    }
-
-    .btn-whatsapp .wa-sub {
-      font-weight: 400;
-      font-size: 0.8rem;
-      opacity: 0.85;
+    .submit-order-btn i {
+      font-size: 1.3rem;
     }
 
     .floating-order-btn {
@@ -670,595 +661,621 @@
       white-space: nowrap;
       box-shadow: 0 10px 30px rgba(196, 30, 58, 0.4);
       transition: 0.3s;
-      font-family: 'Montserrat', sans-serif;
     }
-    .floating-order-btn:hover {
-      transform: translateX(-50%) scale(1.05);
-      background: var(--red-dark);
-    }
+    .floating-order-btn:hover { transform: translateX(-50%) scale(1.05); background: var(--red-dark); }
 
-    .footer {
-      background: var(--red-dark);
-      color: white;
-      padding: 3rem 2rem 1.5rem;
-      margin-top: 2rem;
-    }
-    .footer-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      justify-content: space-between;
-    }
-    .footer-col h4 {
-      font-family: 'Playfair Display', serif;
-      margin-bottom: 1rem;
-    }
-    .footer-col a,
-    .footer-col p {
-      color: rgba(255, 255, 255, 0.8);
-      text-decoration: none;
-      font-size: 0.85rem;
-      display: block;
-    }
-    .footer-col a:hover {
-      color: white;
-    }
-    .footer-bottom {
-      text-align: center;
-      padding-top: 2rem;
-      margin-top: 2rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.2);
-    }
+    .footer { background: var(--red-dark); color: white; padding: 3rem 2rem 1.5rem; margin-top: 2rem; }
+    .footer-container { max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between; }
+    .footer-col h4 { font-family: 'Playfair Display', serif; margin-bottom: 1rem; }
+    .footer-col a, .footer-col p { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; display: block; }
+    .footer-col a:hover { color: white; }
+    .footer-bottom { text-align: center; padding-top: 2rem; margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.2); }
 
-    @media (max-width: 900px) {
-      .review-card {
-        flex: 0 0 calc((100% - 24px) / 2);
-      }
-    }
+    @media (max-width: 900px) { .review-card { flex: 0 0 calc((100% - 24px) / 2); } }
     @media (max-width: 560px) {
-      .review-card {
-        flex: 0 0 100%;
-      }
-      .hero-content h1 {
-        font-size: 2.8rem;
-      }
-      .floating-order-btn {
-        padding: 12px 24px;
-        font-size: 0.9rem;
-      }
-      .size-selector {
-        gap: 8px;
-      }
-      .size-option {
-        padding: 12px 14px;
-        font-size: 0.9rem;
-        min-width: 60px;
-      }
-      .modal-content {
-        padding: 1.5rem;
-        border-radius: 20px;
-      }
-      .btn-whatsapp {
-        font-size: 1rem;
-        padding: 14px 20px;
-      }
-      .btn-whatsapp .wa-sub {
-        display: none;
-      }
+      .review-card { flex: 0 0 100%; }
+      .hero-content h1 { font-size: 2.8rem; }
+      .floating-order-btn { padding: 12px 24px; font-size: 0.9rem; }
+      .size-selector { gap: 6px; }
+      .size-option { padding: 12px 14px; font-size: 0.85rem; min-width: 60px; }
+      .modal-content { padding: 1.2rem; }
+      .cart-item { flex-wrap: wrap; gap: 8px; }
+      .cart-controls { margin-left: auto; }
     }
   </style>
 </head>
 <body>
 
-  <!-- MENU OVERLAY -->
-  <div id="menuOverlay" class="menu-overlay"></div>
+<!-- MENU OVERLAY -->
+<div id="menuOverlay" class="menu-overlay"></div>
 
-  <!-- HERO SECTION -->
-  <header class="hero" id="home">
-    <video autoplay muted loop playsinline>
-      <source src="video.mp4" type="video/mp4">
-    </video>
-    <div class="hero-overlay"></div>
+<!-- HERO SECTION -->
+<header class="hero" id="home">
+  <video autoplay muted loop playsinline>
+    <source src="video.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
 
-    <nav class="navbar">
-      <a href="#home" class="logo">YESKI PIZZA</a>
-      <button class="hamburger" id="hamburgerBtn">☰</button>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#menu-section">Menu</a></li>
-        <li><a href="#reviews">Reviews</a></li>
-        <li><a href="#map">Location</a></li>
-        <li><a href="#" id="orderNavBtn">Order Now</a></li>
-      </ul>
-    </nav>
+  <nav class="navbar">
+    <a href="#home" class="logo">YESKI PIZZA</a>
+    <button class="hamburger" id="hamburgerBtn">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#menu-section">Menu</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#map">Location</a></li>
+      <li><a href="#" id="orderNavBtn">Order Now</a></li>
+    </ul>
+  </nav>
 
-    <div class="hero-content">
-      <h1>YESKI <span>PIZZA</span></h1>
-      <p>Artisan Pizza Craft • Obuasi, Ghana</p>
-      <div class="buttons">
-        <a href="#menu-section" class="btn btn-primary">Order Now</a>
-        <a href="#map" class="btn btn-secondary">Find Us</a>
+  <div class="hero-content">
+    <h1>YESKI <span>PIZZA</span></h1>
+    <p>Artisan Pizza Craft • Obuasi, Ghana</p>
+    <div class="buttons">
+      <a href="#menu-section" class="btn btn-primary">Order Now</a>
+      <a href="#map" class="btn btn-secondary">Find Us</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="menu-section" class="menu-showcase">
+    <div class="main-container">
+      <div class="section-header"><h2>Our <span>Artisan Menu</span></h2><p>Handcrafted pizzas made from the finest ingredients</p></div>
+      <div class="slider-premium">
+        <div class="slider-container">
+          <div class="slides-wrap" id="slidesWrap"></div>
+          <button class="slide-nav prev" id="prevBtn">‹</button>
+          <button class="slide-nav next" id="nextBtn">›</button>
+        </div>
+        <div class="menu-info">
+          <div class="pizza-name" id="pizzaName">Palemo</div>
+          <div class="pizza-tagline" id="pizzaTagline">Chicken, Beef, Pepperoni</div>
+          <p class="pizza-desc" id="pizzaDesc">A delicious blend of chicken, beef, and pepperoni with our signature sauce.</p>
+          <div class="order-now-box" id="orderFromMenuBtn">
+            <i class="fas fa-shopping-bag"></i>
+            <span>ORDER NOW</span>
+            <i class="fas fa-arrow-right"></i>
+          </div>
+          <div class="dots-row" id="dotsRow"></div>
+        </div>
       </div>
     </div>
-  </header>
+  </section>
 
-  <main>
-    <section id="menu-section" class="menu-showcase">
-      <div class="main-container">
-        <div class="section-header"><h2>Our <span>Artisan Menu</span></h2><p>Handcrafted pizzas made from the finest ingredients</p></div>
-        <div class="slider-premium">
-          <div class="slider-container">
-            <div class="slides-wrap" id="slidesWrap"></div>
-            <button class="slide-nav prev" id="prevBtn">‹</button>
-            <button class="slide-nav next" id="nextBtn">›</button>
-          </div>
-          <div class="menu-info">
-            <div class="pizza-name" id="pizzaName">The Dukeman</div>
-            <div class="pizza-tagline" id="pizzaTagline">Beef, Sausage, Bacon, Onions</div>
-            <p class="pizza-desc" id="pizzaDesc">Rich, meaty, and impossibly satisfying. Piled high with premium beef, smoky sausage, crispy bacon, and caramelized onions over a robust tomato base.</p>
-            <div class="order-now-box" id="orderFromMenuBtn">
-              <i class="fas fa-shopping-bag"></i>
-              <span>ORDER NOW</span>
-              <i class="fas fa-arrow-right"></i>
-            </div>
-            <div class="dots-row" id="dotsRow"></div>
-          </div>
+  <section id="map" class="map-section">
+    <div class="main-container">
+      <h2>Find <span>Us</span></h2>
+      <div class="map-container">
+        <div class="map-placeholder">
+          <i class="fas fa-map-marked-alt"></i>
+          <h3>Map Placeholder</h3>
+          <p>Paste your Google Maps iframe code here</p>
         </div>
       </div>
-    </section>
-
-    <section id="map" class="map-section">
-      <div class="main-container">
-        <h2>Find <span>Us</span></h2>
-        <div class="map-container">
-          <div class="map-placeholder">
-            <i class="fas fa-map-marked-alt"></i>
-            <h3>Map Placeholder</h3>
-            <p>Paste your Google Maps iframe code here</p>
-          </div>
-        </div>
-        <div class="address-info">
-          <div class="address-card"><i class="fas fa-map-marker-alt"></i><span>Plot 75, Adumurah Bossman Street, Obuasi, Ghana</span></div>
-          <div class="address-card"><i class="fas fa-clock"></i><span>Mon-Sun: 11am - 10pm</span></div>
-        </div>
+      <div class="address-info">
+        <div class="address-card"><i class="fas fa-map-marker-alt"></i><span>Plot 75, Adumurah Bossman Street, Obuasi, Ghana</span></div>
+        <div class="address-card"><i class="fas fa-clock"></i><span>Mon-Sun: 11am - 10pm</span></div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="reviews" class="reviews-section">
-      <div class="section-title">What our customers have to say</div>
-      <div class="rating-row"><div class="stars">★★★★★</div><span class="rating-score">4.9</span><span class="rating-count">(29K+ reviews)</span></div>
-      <div class="slider-wrapper">
-        <button class="review-nav-btn" id="reviewPrev">‹</button>
-        <div class="slider-viewport"><div class="slider-track" id="reviewTrack"></div></div>
-        <button class="review-nav-btn" id="reviewNext">›</button>
+  <section id="reviews" class="reviews-section">
+    <div class="section-title">What our customers have to say</div>
+    <div class="rating-row"><div class="stars">★★★★★</div><span class="rating-score">4.9</span><span class="rating-count">(29K+ reviews)</span></div>
+    <div class="slider-wrapper">
+      <button class="review-nav-btn" id="reviewPrev">‹</button>
+      <div class="slider-viewport"><div class="slider-track" id="reviewTrack"></div></div>
+      <button class="review-nav-btn" id="reviewNext">›</button>
+    </div>
+    <div class="review-dots" id="reviewDots"></div>
+  </section>
+
+  <!-- MODERN ORDER MODAL -->
+  <div id="orderModal" class="order-modal">
+    <div class="modal-content">
+      <!-- Header -->
+      <div class="modal-header">
+        <h2>Your Order</h2>
+        <span class="close-modal" id="closeModalBtn">×</span>
       </div>
-      <div class="review-dots" id="reviewDots"></div>
-    </section>
 
-    <!-- MODERN ORDER MODAL -->
-    <div id="orderModal" class="order-modal">
-      <div class="modal-content">
-        <div class="close-modal" id="closeModalBtn">&times;</div>
-
-        <div class="modal-header">
+      <!-- Cart Items -->
+      <div class="cart-items-list" id="cartItemsList">
+        <div class="empty-cart">
           <i class="fas fa-shopping-bag"></i>
-          <h2>Your Order</h2>
+          <p>Your cart is empty</p>
+          <p style="font-size:0.85rem;color:#bbb;">Select a pizza and size below</p>
         </div>
-
-        <div id="cartItemsList"></div>
-        <div class="cart-total" id="cartTotal">Total: <span>GHS 0</span></div>
-
-        <div class="size-selector-label">Select Pizza Size</div>
-        <div class="size-selector" id="sizeSelector">
-          <div class="size-option" data-size="Large" data-price="0">
-            <span class="size-label">Large</span>
-            <span class="size-price">GHS 0</span>
-          </div>
-          <div class="size-option" data-size="Medium" data-price="0">
-            <span class="size-label">Medium</span>
-            <span class="size-price">GHS 0</span>
-          </div>
-          <div class="size-option active" data-size="Small" data-price="0">
-            <span class="size-label">Small</span>
-            <span class="size-price">GHS 0</span>
-          </div>
-        </div>
-
-        <form id="orderForm" class="order-form">
-          <div class="form-group">
-            <label for="customerName">Full Name</label>
-            <input type="text" id="customerName" placeholder="Enter your full name" required>
-          </div>
-          <div class="form-group">
-            <label for="customerLocation">Delivery Address</label>
-            <input type="text" id="customerLocation" placeholder="Enter your delivery location" required>
-          </div>
-          <div class="form-group">
-            <label for="specialInstructions">Special Instructions</label>
-            <textarea id="specialInstructions" rows="2" placeholder="Any allergies, gate code, or special notes..."></textarea>
-          </div>
-
-          <button type="submit" id="submitOrderBtn" class="btn-whatsapp">
-            <i class="fab fa-whatsapp"></i>
-            <span class="wa-text">Send Order via WhatsApp</span>
-            <span class="wa-sub">• 059 559 0891</span>
-          </button>
-        </form>
       </div>
+
+      <!-- Cart Total -->
+      <div class="cart-total">
+        <span class="total-label">Total</span>
+        <span class="total-amount" id="cartTotal">GHS 0</span>
+      </div>
+
+      <!-- Size Selector -->
+      <label class="size-selector-label">Select Pizza Size</label>
+      <div class="size-selector" id="sizeSelector">
+        <div class="size-option" data-size="Large" data-price="0">
+          <span class="size-label">🍕 Large</span>
+          <span class="size-price">GHS 0</span>
+        </div>
+        <div class="size-option" data-size="Medium" data-price="0">
+          <span class="size-label">🍕 Medium</span>
+          <span class="size-price">GHS 0</span>
+        </div>
+        <div class="size-option active" data-size="Small" data-price="0">
+          <span class="size-label">🍕 Small</span>
+          <span class="size-price">GHS 0</span>
+        </div>
+      </div>
+
+      <!-- Delivery Details -->
+      <label class="form-section-title">Delivery Details</label>
+      <form id="orderForm" class="order-form">
+        <input type="text" id="customerName" placeholder="Full Name" required>
+        <input type="text" id="customerLocation" placeholder="Delivery Address / Location" required>
+        <textarea id="specialInstructions" rows="2" placeholder="Additional notes (allergies, gate code, etc.)"></textarea>
+        <button type="submit" class="submit-order-btn" id="submitOrderBtn">
+          <i class="fab fa-whatsapp"></i>
+          Send Order via WhatsApp
+        </button>
+      </form>
     </div>
-  </main>
+  </div>
+</main>
 
-  <footer class="footer">
-    <div class="footer-container">
-      <div class="footer-col"><h4>Company</h4><a href="#home">Home</a><a href="#menu-section">Menu</a></div>
-      <div class="footer-col"><h4>Contact</h4><p>059 559 0891</p><p>info@yeskipizza.com</p></div>
-    </div>
-    <div class="footer-bottom"><p>&copy; 2025 Yeski Pizza. All rights reserved.</p></div>
-  </footer>
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-col"><h4>Company</h4><a href="#home">Home</a><a href="#menu-section">Menu</a></div>
+    <div class="footer-col"><h4>Contact</h4><p>059 559 0891</p><p>info@yeskipizza.com</p></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2025 Yeski Pizza. All rights reserved.</p></div>
+</footer>
 
-  <button class="floating-order-btn" id="floatingCartBtn">
-    <i class="fas fa-shopping-bag"></i>
-    <span>ORDER NOW</span>
-    <i class="fas fa-arrow-right"></i>
-  </button>
+<button class="floating-order-btn" id="floatingCartBtn">
+  <i class="fas fa-shopping-bag"></i>
+  <span>ORDER NOW</span>
+  <i class="fas fa-arrow-right"></i>
+</button>
 
-  <script>
-    // ========== MENU ITEMS WITH PRICES ==========
-    const menuItems = [
-      { id: 0, name: "Palemo", tagline: "Chicken, Beef, Pepperoni", prices: { Large: 70, Medium: 60, Small: 50 },
-      desc: "A delicious blend of chicken, beef, and pepperoni with our signature sauce." },
-      { id: 1, name: "Spinelli", tagline: "Chicken, Beef", prices: { Large: 80, Medium: 60, Small: 48 },
-      desc: "Perfectly seasoned chicken and beef on a golden crust with mozzarella." },
-      { id: 2, name: "Stella", tagline: "Pepperoni, Beef", prices: { Large: 78, Medium: 60, Small: 45 },
-      desc: "Classic pepperoni paired with premium beef for a meat lover's delight." },
-      { id: 3, name: "Cherry", tagline: "Chicken, Pepperoni", prices: { Large: 75, Medium: 65, Small: 50 },
-      desc: "A perfect harmony of chicken and pepperoni with a touch of herbs." },
-      { id: 4, name: "Mory", tagline: "Vegetables", prices: { Large: 55, Medium: 45, Small: 35 },
-      desc: "A garden-fresh pizza loaded with seasonal vegetables and light tomato sauce." },
-      { id: 5, name: "Napoli", tagline: "Sausage, Pepperoni", prices: { Large: 60, Medium: 50, Small: 40 },
-      desc: "Hearty sausage and spicy pepperoni on a classic tomato base." },
-      { id: 6, name: "Nikkos", tagline: "Vegetables, Pepperoni, Beef, Chicken, Sausage", prices: { Large: 90, Medium: 70,
-        Small: 60 }, desc: "The ultimate supreme pizza with all our premium toppings in one bite." }
-    ];
+<script>
+  // ========== PIZZA MENU WITH PRICES ==========
+  const menuItems = [
+    { id: 0, name: "Palemo", tagline: "Chicken, Beef, Pepperoni", prices: { Large: 70, Medium: 60, Small: 50 }, desc: "A delicious blend of chicken, beef, and pepperoni with our signature sauce." },
+    { id: 1, name: "Spinelli", tagline: "Chicken, Beef", prices: { Large: 80, Medium: 60, Small: 48 }, desc: "Perfectly seasoned chicken and beef on a golden crust with mozzarella." },
+    { id: 2, name: "Stella", tagline: "Pepperoni, Beef", prices: { Large: 78, Medium: 60, Small: 45 }, desc: "Classic pepperoni paired with premium beef for a meat lover's delight." },
+    { id: 3, name: "Cherry", tagline: "Chicken, Pepperoni", prices: { Large: 75, Medium: 65, Small: 50 }, desc: "A perfect harmony of chicken and pepperoni with a touch of herbs." },
+    { id: 4, name: "Mory", tagline: "Vegetables", prices: { Large: 55, Medium: 45, Small: 35 }, desc: "A garden-fresh pizza loaded with seasonal vegetables and light tomato sauce." },
+    { id: 5, name: "Napoli", tagline: "Sausage, Pepperoni", prices: { Large: 60, Medium: 50, Small: 40 }, desc: "Hearty sausage and spicy pepperoni on a classic tomato base." },
+    { id: 6, name: "Nikkos", tagline: "Vegetables, Pepperoni, Beef, Chicken, Sausage", prices: { Large: 90, Medium: 70, Small: 60 }, desc: "The ultimate supreme pizza with all our premium toppings in one bite." }
+  ];
 
-    let cart = [],
-      currentSlide = 0;
-    let selectedSize = 'Small';
-    let selectedSizePrice = 0;
+  let cart = [];
+  let currentSlide = 0;
+  let selectedSize = 'Small';
+  let autoSlide;
 
-    // ========== SLIDER ==========
-    const slidesWrap = document.getElementById('slidesWrap');
-    const dotsRow = document.getElementById('dotsRow');
-    const pizzaNameSpan = document.getElementById('pizzaName');
-    const pizzaTaglineSpan = document.getElementById('pizzaTagline');
-    const pizzaDescSpan = document.getElementById('pizzaDesc');
+  // ========== SLIDER ==========
+  const slidesWrap = document.getElementById('slidesWrap');
+  const dotsRow = document.getElementById('dotsRow');
+  const pizzaNameSpan = document.getElementById('pizzaName');
+  const pizzaTaglineSpan = document.getElementById('pizzaTagline');
+  const pizzaDescSpan = document.getElementById('pizzaDesc');
 
-    menuItems.forEach((item, idx) => {
-      const slide = document.createElement('div');
-      slide.className = 'slide';
-      slide.innerHTML =
-        `<div class="slide-img"><i class="fas fa-pizza-slice" style="font-size:5rem;color:var(--red);margin-bottom:1rem;"></i><h3 style="color:white;">${item.name}</h3><p style="color:#999;">${item.tagline}</p><p style="color:#666;font-size:0.8rem;margin-top:0.5rem;">Large GHS ${item.prices.Large} | Medium GHS ${item.prices.Medium} | Small GHS ${item.prices.Small}</p></div>`;
-      slidesWrap.appendChild(slide);
-      const dot = document.createElement('button');
-      dot.className = 'dot' + (idx === 0 ? ' active' : '');
-      dot.onclick = () => goToSlide(idx);
-      dotsRow.appendChild(dot);
-    });
+  menuItems.forEach((item, idx) => {
+    const slide = document.createElement('div');
+    slide.className = 'slide';
+    slide.innerHTML = `
+      <div class="slide-img">
+        <i class="fas fa-pizza-slice" style="font-size:5rem;color:var(--red);margin-bottom:1rem;"></i>
+        <h3 style="color:white;">${item.name}</h3>
+        <p style="color:#999;">${item.tagline}</p>
+        <p style="color:#666;font-size:0.8rem;margin-top:0.5rem;">
+          Large GHS ${item.prices.Large} | Medium GHS ${item.prices.Medium} | Small GHS ${item.prices.Small}
+        </p>
+      </div>
+    `;
+    slidesWrap.appendChild(slide);
 
-    function goToSlide(i) { currentSlide = i;
-      updateSlider(); }
+    const dot = document.createElement('button');
+    dot.className = 'dot' + (idx === 0 ? ' active' : '');
+    dot.onclick = () => goToSlide(idx);
+    dotsRow.appendChild(dot);
+  });
 
-    function updateSlider() {
-      slidesWrap.style.transform = `translateX(-${currentSlide * 100}%)`;
-      document.querySelectorAll('.dot').forEach((d, i) => d.className = 'dot' + (i === currentSlide ? ' active' : ''));
-      const item = menuItems[currentSlide];
-      pizzaNameSpan.innerText = item.name;
-      pizzaTaglineSpan.innerText = item.tagline;
-      pizzaDescSpan.innerText = item.desc;
-      updateSizePrices(item);
-    }
-
-    function updateSizePrices(item) {
-      const sizeOptions = document.querySelectorAll('.size-option');
-      sizeOptions.forEach(opt => {
-        const size = opt.dataset.size;
-        const price = item.prices[size] || 0;
-        opt.dataset.price = price;
-        opt.querySelector('.size-price').textContent = `GHS ${price}`;
-      });
-      const activeSize = document.querySelector('.size-option.active');
-      if (activeSize) {
-        selectedSize = activeSize.dataset.size;
-        selectedSizePrice = parseInt(activeSize.dataset.price) || 0;
-      }
-    }
-
-    document.getElementById('prevBtn').onclick = () => goToSlide((currentSlide - 1 + menuItems.length) % menuItems.length);
-    document.getElementById('nextBtn').onclick = () => goToSlide((currentSlide + 1) % menuItems.length);
+  function goToSlide(i) {
+    currentSlide = i;
     updateSlider();
-    setInterval(() => goToSlide((currentSlide + 1) % menuItems.length), 4000);
+  }
 
-    // ========== SIZE SELECTOR ==========
-    document.querySelectorAll('.size-option').forEach(opt => {
-      opt.addEventListener('click', function() {
-        document.querySelectorAll('.size-option').forEach(o => o.classList.remove('active'));
-        this.classList.add('active');
-        selectedSize = this.dataset.size;
-        selectedSizePrice = parseInt(this.dataset.price) || 0;
-        renderCart();
+  function updateSlider() {
+    slidesWrap.style.transform = `translateX(-${currentSlide * 100}%)`;
+    document.querySelectorAll('.dot').forEach((d, i) => {
+      d.className = 'dot' + (i === currentSlide ? ' active' : '');
+    });
+    const item = menuItems[currentSlide];
+    pizzaNameSpan.innerText = item.name;
+    pizzaTaglineSpan.innerText = item.tagline;
+    pizzaDescSpan.innerText = item.desc;
+    updateSizePrices(item);
+  }
+
+  function updateSizePrices(item) {
+    const sizeOptions = document.querySelectorAll('.size-option');
+    sizeOptions.forEach(opt => {
+      const size = opt.dataset.size;
+      const price = item.prices[size] || 0;
+      opt.dataset.price = price;
+      opt.querySelector('.size-price').textContent = `GHS ${price}`;
+    });
+    // Update selected size
+    const activeSize = document.querySelector('.size-option.active');
+    if (activeSize) {
+      selectedSize = activeSize.dataset.size;
+    }
+    // Update cart prices to match new size selection
+    updateCartPrices();
+    renderCart();
+  }
+
+  // ========== UPDATE CART PRICES WHEN SIZE CHANGES ==========
+  function updateCartPrices() {
+    const activeSize = document.querySelector('.size-option.active');
+    if (!activeSize) return;
+    const newSize = activeSize.dataset.size;
+    const newPrice = parseInt(activeSize.dataset.price) || 0;
+
+    cart.forEach(item => {
+      // Only update items that don't have a size assigned or match the new size
+      // Actually, we want to update ALL items to use the new size's price
+      // But we need to know which pizza it is to get the correct price
+      const pizzaData = menuItems.find(p => p.id === item.id);
+      if (pizzaData) {
+        const updatedPrice = pizzaData.prices[newSize] || pizzaData.prices.Small;
+        item.price = updatedPrice;
+        item.size = newSize;
+      }
+    });
+  }
+
+  document.getElementById('prevBtn').onclick = () => goToSlide((currentSlide - 1 + menuItems.length) % menuItems.length);
+  document.getElementById('nextBtn').onclick = () => goToSlide((currentSlide + 1) % menuItems.length);
+  updateSlider();
+
+  // Start autoplay
+  function startAutoplay() {
+    if (autoSlide) clearInterval(autoSlide);
+    autoSlide = setInterval(() => goToSlide((currentSlide + 1) % menuItems.length), 4000);
+  }
+
+  function stopAutoplay() {
+    if (autoSlide) {
+      clearInterval(autoSlide);
+      autoSlide = null;
+    }
+  }
+
+  startAutoplay();
+
+  // Pause autoplay on slider hover
+  document.querySelector('.slider-container').addEventListener('mouseenter', stopAutoplay);
+  document.querySelector('.slider-container').addEventListener('mouseleave', startAutoplay);
+
+  // ========== SIZE SELECTOR - UPDATE CART PRICES ==========
+  document.querySelectorAll('.size-option').forEach(opt => {
+    opt.addEventListener('click', function() {
+      document.querySelectorAll('.size-option').forEach(o => o.classList.remove('active'));
+      this.classList.add('active');
+      selectedSize = this.dataset.size;
+      updateCartPrices(); // <-- FIX: Update all cart item prices
+      renderCart();
+    });
+  });
+
+  // ========== CART FUNCTIONS ==========
+  function addToCart(id) {
+    const item = menuItems.find(i => i.id === id);
+    if (!item) return;
+    const price = parseInt(document.querySelector('.size-option.active')?.dataset.price) || item.prices[selectedSize] || item.prices.Small;
+    const size = selectedSize;
+
+    const existing = cart.find(i => i.id === id && i.size === size);
+    if (existing) {
+      existing.quantity++;
+    } else {
+      cart.push({
+        ...item,
+        quantity: 1,
+        size: size,
+        price: price
       });
+    }
+    renderCart();
+  }
+
+  function removeItem(id, size) {
+    cart = cart.filter(i => !(i.id === id && i.size === size));
+    renderCart();
+  }
+
+  function updateQty(id, size, delta) {
+    const idx = cart.findIndex(i => i.id === id && i.size === size);
+    if (idx !== -1) {
+      cart[idx].quantity += delta;
+      if (cart[idx].quantity <= 0) cart.splice(idx, 1);
+    }
+    renderCart();
+  }
+
+  function renderCart() {
+    const container = document.getElementById('cartItemsList');
+    const totalEl = document.getElementById('cartTotal');
+    if (!container) return;
+
+    if (cart.length === 0) {
+      container.innerHTML = `
+        <div class="empty-cart">
+          <i class="fas fa-shopping-bag"></i>
+          <p>Your cart is empty</p>
+          <p style="font-size:0.85rem;color:#bbb;">Select a pizza and size below</p>
+        </div>
+      `;
+      totalEl.textContent = 'GHS 0';
+      return;
+    }
+
+    let html = '';
+    let total = 0;
+    cart.forEach((item, index) => {
+      const itemTotal = item.price * item.quantity;
+      total += itemTotal;
+      html += `
+        <div class="cart-item">
+          <div class="cart-item-details">
+            <span class="item-name">${item.name}</span>
+            <span class="item-size">${item.size} • GHS ${item.price} each</span>
+          </div>
+          <div class="cart-controls">
+            <button onclick="updateQty(${item.id}, '${item.size}', -1)">−</button>
+            <span class="qty">${item.quantity}</span>
+            <button onclick="updateQty(${item.id}, '${item.size}', 1)">+</button>
+            <button class="remove-btn" onclick="removeItem(${item.id}, '${item.size}')">×</button>
+          </div>
+        </div>
+      `;
     });
 
-    // ========== CART FUNCTIONS ==========
-    function addToCart(id) {
-      const item = menuItems.find(i => i.id === id);
-      if (!item) return;
-      const price = selectedSizePrice || item.prices[selectedSize] || item.prices.Small;
-      const existing = cart.find(i => i.id === id && i.size === selectedSize);
-      if (existing) {
-        existing.quantity++;
-      } else {
-        cart.push({
-          ...item,
-          quantity: 1,
-          size: selectedSize,
-          price: price
-        });
-      }
-      renderCart();
+    container.innerHTML = html;
+    totalEl.textContent = `GHS ${total}`;
+  }
+
+  // ========== SEND ORDER VIA WHATSAPP ==========
+  function sendOrder() {
+    const name = document.getElementById('customerName')?.value.trim();
+    const location = document.getElementById('customerLocation')?.value.trim();
+    const special = document.getElementById('specialInstructions')?.value.trim();
+
+    if (!name || !location) {
+      alert('Please enter your name and delivery address.');
+      return false;
     }
 
-    function removeItem(id, size) {
-      cart = cart.filter(i => !(i.id === id && i.size === size));
-      renderCart();
+    if (cart.length === 0) {
+      alert('Your cart is empty. Please add items to your order.');
+      return false;
     }
 
-    function updateQty(id, size, delta) {
-      const idx = cart.findIndex(i => i.id === id && i.size === size);
-      if (idx !== -1) {
-        cart[idx].quantity += delta;
-        if (cart[idx].quantity <= 0) cart.splice(idx, 1);
-      }
-      renderCart();
-    }
+    let message = ' YESKI PIZZA ORDER \n\n';
+    message += ` Customer: ${name}\n`;
+    message += ` Location: ${location}\n`;
+    message += ` Notes: ${special || 'None'}\n\n`;
+    message += '━━━ YOUR ORDER ━━━\n';
 
-    function renderCart() {
-      const c = document.getElementById('cartItemsList');
-      if (!c) return;
-      if (cart.length === 0) {
-        c.innerHTML =
-          `<div class="cart-empty"><i class="fas fa-shopping-bag"></i><p>Your cart is empty. Select a pizza and size above.</p></div>`;
-        document.getElementById('cartTotal').innerHTML = 'Total: <span>GHS 0</span>';
-        return;
-      }
-      let html = '',
-        total = 0;
-      cart.forEach(i => {
-        const itemTotal = i.price * i.quantity;
-        total += itemTotal;
-        html += `
-            <div class="cart-item">
-              <div class="cart-item-details">
-                <span class="item-name">${i.name}</span>
-                <span class="item-size">${i.size} • GHS ${i.price} each</span>
-              </div>
-              <div class="cart-controls">
-                <button onclick="updateQty(${i.id}, '${i.size}', -1)">−</button>
-                <span class="qty-num">${i.quantity}</span>
-                <button onclick="updateQty(${i.id}, '${i.size}', 1)">+</button>
-                <button class="remove-btn" onclick="removeItem(${i.id}, '${i.size}')">✕</button>
-              </div>
-            </div>
-          `;
-      });
-      c.innerHTML = html;
-      document.getElementById('cartTotal').innerHTML = `Total: <span>GHS ${total}</span>`;
-    }
-
-    // ========== SEND ORDER VIA WHATSAPP ==========
-    function sendOrder() {
-      const name = document.getElementById('customerName')?.value.trim();
-      const loc = document.getElementById('customerLocation')?.value.trim();
-      const special = document.getElementById('specialInstructions')?.value.trim();
-
-      if (!name || !loc) {
-        alert("Please enter your name and delivery address.");
-        return false;
-      }
-      if (cart.length === 0) {
-        alert("Your cart is empty. Please add items to your order.");
-        return false;
-      }
-
-      let msg = " YESKI PIZZA ORDER \n\n";
-      msg += ` Customer: ${name}\n`;
-      msg += ` Location: ${loc}\n`;
-      msg += ` Notes: ${special || "None"}\n\n`;
-      msg += "━━━ YOUR ORDER ━━━\n";
-
-      let total = 0;
-      cart.forEach(i => {
-        msg += `▸ ${i.name} (${i.size}) x${i.quantity} = GHS ${i.price * i.quantity}\n`;
-        total += i.price * i.quantity;
-      });
-
-      msg += `\n TOTAL: GHS ${total}`;
-      msg += `\n\n Call us: 059 559 0891`;
-      msg += `\n Location: Obuasi, Ghana`;
-      msg += `\n\nThank you for ordering from Yeski Pizza! `;
-
-      const phone = "233595590891";
-      window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
-      return true;
-    }
-
-    // ========== MODAL CONTROLS ==========
-    const modal = document.getElementById('orderModal');
-    const openModalBtns = document.querySelectorAll('#orderNavBtn, #orderFromMenuBtn, #floatingCartBtn');
-
-    openModalBtns.forEach(btn => {
-      btn?.addEventListener('click', (e) => {
-        e.preventDefault();
-        updateSizePrices(menuItems[currentSlide]);
-        renderCart();
-        modal.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-      });
+    let total = 0;
+    cart.forEach(item => {
+      message += `▸ ${item.name} (${item.size}) x${item.quantity} = GHS ${item.price * item.quantity}\n`;
+      total += item.price * item.quantity;
     });
 
-    document.getElementById('closeModalBtn')?.addEventListener('click', () => {
-      modal.style.display = 'none';
-      document.body.style.overflow = '';
-    });
-    window.onclick = e => {
-      if (e.target === modal) {
-        modal.style.display = 'none';
-        document.body.style.overflow = '';
-      }
-    };
+    message += `\n TOTAL: GHS ${total}`;
+    message += '\n\n Call us: 059 559 0891';
+    message += '\n Location: Obuasi, Ghana';
+    message += '\n\nThank you for ordering from Yeski Pizza! ';
 
-    document.getElementById('submitOrderBtn')?.addEventListener('click', (e) => {
+    const phone = '233595590891';
+    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
+    return true;
+  }
+
+  // ========== MODAL CONTROLS ==========
+  const modal = document.getElementById('orderModal');
+  const openModalBtns = document.querySelectorAll('#orderNavBtn, #orderFromMenuBtn, #floatingCartBtn');
+
+  openModalBtns.forEach(btn => {
+    btn?.addEventListener('click', (e) => {
       e.preventDefault();
-      if (sendOrder()) {
-        modal.style.display = 'none';
-        document.body.style.overflow = '';
-        cart = [];
-        renderCart();
-      }
-    });
-
-    document.getElementById('orderFromMenuBtn')?.addEventListener('click', () => {
-      addToCart(menuItems[currentSlide].id);
-      alert(`${menuItems[currentSlide].name} (${selectedSize}) added to your order!`);
-    });
-
-    window.addToCart = addToCart;
-    window.removeItem = removeItem;
-    window.updateQty = updateQty;
-
-    // ========== HAMBURGER MENU ==========
-    const hamburger = document.getElementById('hamburgerBtn');
-    const mobileMenu = document.getElementById('navLinks');
-    const overlay = document.getElementById('menuOverlay');
-
-    function openMenu() {
-      mobileMenu.classList.add('show');
-      overlay.classList.add('show');
+      stopAutoplay();
+      updateSizePrices(menuItems[currentSlide]);
+      modal.style.display = 'flex';
       document.body.style.overflow = 'hidden';
-    }
+    });
+  });
 
-    function closeMenu() {
-      mobileMenu.classList.remove('show');
-      overlay.classList.remove('show');
-      document.body.style.overflow = '';
-    }
+  function closeModal() {
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+    startAutoplay();
+  }
 
-    hamburger?.addEventListener('click', function(e) {
-      e.stopPropagation();
-      if (mobileMenu.classList.contains('show')) {
-        closeMenu();
-      } else {
-        openMenu();
+  document.getElementById('closeModalBtn')?.addEventListener('click', closeModal);
+
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+
+  document.getElementById('submitOrderBtn')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (sendOrder()) {
+      closeModal();
+      cart = [];
+      renderCart();
+    }
+  });
+
+  document.getElementById('orderFromMenuBtn')?.addEventListener('click', () => {
+    addToCart(menuItems[currentSlide].id);
+    // Show feedback
+    const btn = document.getElementById('orderFromMenuBtn');
+    btn.innerHTML = '<i class="fas fa-check"></i><span>ADDED!</span>';
+    setTimeout(() => {
+      btn.innerHTML = '<i class="fas fa-shopping-bag"></i><span>ORDER NOW</span><i class="fas fa-arrow-right"></i>';
+    }, 1000);
+  });
+
+  // ========== HAMBURGER MENU ==========
+  const hamburger = document.getElementById('hamburgerBtn');
+  const mobileMenu = document.getElementById('navLinks');
+  const overlay = document.getElementById('menuOverlay');
+
+  function openMenu() {
+    mobileMenu.classList.add('show');
+    overlay.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    mobileMenu.classList.remove('show');
+    overlay.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  hamburger?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (mobileMenu.classList.contains('show')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+
+  overlay?.addEventListener('click', closeMenu);
+
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === '#') {
+        e.preventDefault();
+        document.getElementById('orderFromMenuBtn').click();
+      } else if (href && href !== '#') {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
+      closeMenu();
     });
+  });
 
-    overlay?.addEventListener('click', closeMenu);
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) closeMenu();
+  });
 
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', function(e) {
-        const href = this.getAttribute('href');
-        if (href === '#') {
-          e.preventDefault();
-          document.getElementById('orderFromMenuBtn').click();
-        } else if (href && href !== '#') {
-          e.preventDefault();
-          const target = document.querySelector(href);
-          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-        closeMenu();
-      });
+  // Hero buttons
+  document.querySelector('.hero-content .btn-primary')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    document.querySelector('#menu-section').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  document.querySelector('.hero-content .btn-secondary')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    document.querySelector('#map').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  // ========== REVIEWS ==========
+  const reviewData = [
+    { quote: "The pizza sold at Yeski Pizza was served at the last supper. Pepperoni Beef one oo!", handle: "@erickambozie", platform: "Via X", color: "red" },
+    { quote: "The meatza be loaded waa, Yeski Pizza really no dey play with toppings!", handle: "@Nana Poku", platform: "Via TikTok", color: "green" },
+    { quote: "The meatza pizza anumde foc! Yeski Pizza on top!", handle: "@princethug89", platform: "Via TikTok", color: "yellow" },
+    { quote: "Still enjoying my Double Chicken Barbecue pizza, tastes soo good!", handle: "@rajways99", platform: "Via TikTok", color: "grey" },
+    { quote: "Yeski Pizza chicken pizza is absolutely fire! Best in town!", handle: "@Ahmed Mustapha", platform: "Via Instagram", color: "orange" },
+    { quote: "Visited Yeski Pizza last weekend. Pepperoni had me going back!", handle: "@Rashid Yemo", platform: "Via X", color: "teal" },
+    { quote: "Yeski Pizza never disappoints. Whole family loved it!", handle: "@blueway73", platform: "Via Facebook", color: "navy" },
+    { quote: "BBQ chicken pizza from Yeski is everything! 10/10!", handle: "@altims88", platform: "Via TikTok", color: "purple" }
+  ];
+
+  const track = document.getElementById('reviewTrack');
+  let revCurr = 0,
+    vis = 4;
+
+  function buildReviews() {
+    track.innerHTML = '';
+    reviewData.forEach(r => {
+      const card = document.createElement('div');
+      card.className = `review-card ${r.color}`;
+      card.innerHTML = `
+        <div class="avatar-wrap"><i class="fas fa-user-circle" style="font-size:3rem;color:rgba(255,255,255,0.8);"></i></div>
+        <p class="card-quote">${r.quote}</p>
+        <div>
+          <span class="card-handle">${r.handle}</span>
+          <span class="card-platform">${r.platform}</span>
+        </div>
+      `;
+      track.appendChild(card);
     });
+  }
 
-    window.addEventListener('resize', function() {
-      if (window.innerWidth > 768) closeMenu();
-    });
+  function getVis() { return window.innerWidth <= 560 ? 1 : window.innerWidth <= 900 ? 2 : 4; }
 
-    // Hero buttons
-    document.querySelector('.hero-content .btn-primary')?.addEventListener('click', function(e) {
-      e.preventDefault();
-      document.querySelector('#menu-section').scrollIntoView({ behavior: 'smooth' });
-    });
-    document.querySelector('.hero-content .btn-secondary')?.addEventListener('click', function(e) {
-      e.preventDefault();
-      document.querySelector('#map').scrollIntoView({ behavior: 'smooth' });
-    });
+  function renderRev() {
+    track.style.transform = `translateX(-${revCurr * (track.parentElement.clientWidth / vis + 24)}px)`;
+  }
 
-    // ========== REVIEWS ==========
-    const reviewData = [
-      { quote: "The pizza sold at Yeski Pizza was served at the last supper. Pepperoni Beef one oo!", handle: "@erickambozie",
-        platform: "Via X", color: "red" },
-      { quote: "The meatza be loaded waa, Yeski Pizza really no dey play with toppings!", handle: "@Nana Poku",
-        platform: "Via TikTok", color: "green" },
-      { quote: "The meatza pizza anumde foc! Yeski Pizza on top!", handle: "@princethug89", platform: "Via TikTok",
-        color: "yellow" },
-      { quote: "Still enjoying my Double Chicken Barbecue pizza, tastes soo good!", handle: "@rajways99",
-        platform: "Via TikTok", color: "grey" },
-      { quote: "Yeski Pizza chicken pizza is absolutely fire! Best in town!", handle: "@Ahmed Mustapha",
-        platform: "Via Instagram", color: "orange" },
-      { quote: "Visited Yeski Pizza last weekend. Pepperoni had me going back!", handle: "@Rashid Yemo", platform: "Via X",
-        color: "teal" },
-      { quote: "Yeski Pizza never disappoints. Whole family loved it!", handle: "@blueway73", platform: "Via Facebook",
-        color: "navy" },
-      { quote: "BBQ chicken pizza from Yeski is everything! 10/10!", handle: "@altims88", platform: "Via TikTok",
-        color: "purple" }
-    ];
-    const track = document.getElementById('reviewTrack');
-    let revCurr = 0,
-      vis = 4;
-
-    function buildReviews() {
-      track.innerHTML = '';
-      reviewData.forEach(r => {
-        const card = document.createElement('div');
-        card.className = `review-card ${r.color}`;
-        card.innerHTML =
-          `<div class="avatar-wrap"><i class="fas fa-user-circle" style="font-size:3rem;color:rgba(255,255,255,0.8);"></i></div><p class="card-quote">${r.quote}</p><div><span class="card-handle">${r.handle}</span><span class="card-platform">${r.platform}</span></div>`;
-        track.appendChild(card);
-      });
+  function updateDots() {
+    const dC = document.getElementById('reviewDots');
+    dC.innerHTML = '';
+    for (let i = 0; i <= reviewData.length - vis; i++) {
+      const d = document.createElement('button');
+      d.className = 'review-dot' + (i === revCurr ? ' active' : '');
+      d.onclick = () => {
+        revCurr = i;
+        renderRev();
+        updateDots();
+      };
+      dC.appendChild(d);
     }
+  }
 
-    function getVis() { return window.innerWidth <= 560 ? 1 : window.innerWidth <= 900 ? 2 : 4; }
-
-    function renderRev() { track.style.transform = `translateX(-${revCurr * (track.parentElement.clientWidth / vis + 24)}px)`; }
-
-    function updateDots() {
-      const dC = document.getElementById('reviewDots');
-      dC.innerHTML = '';
-      for (let i = 0; i <= reviewData.length - vis; i++) {
-        const d = document.createElement('button');
-        d.className = 'review-dot' + (i === revCurr ? ' active' : '');
-        d.onclick = () => { revCurr = i;
-          renderRev();
-          updateDots(); };
-        dC.appendChild(d);
-      }
-    }
-    document.getElementById('reviewPrev').onclick = () => { revCurr = Math.max(0, revCurr - 1);
-      renderRev();
-      updateDots(); };
-    document.getElementById('reviewNext').onclick = () => { revCurr = Math.min(reviewData.length - vis, revCurr + 1);
-      renderRev();
-      updateDots(); };
-    window.addEventListener('resize', () => { vis = getVis();
-      revCurr = 0;
-      renderRev();
-      updateDots(); });
-    buildReviews();
-    vis = getVis();
+  document.getElementById('reviewPrev').onclick = () => {
+    revCurr = Math.max(0, revCurr - 1);
+    renderRev();
     updateDots();
-    setTimeout(renderRev, 50);
-  </script>
+  };
+  document.getElementById('reviewNext').onclick = () => {
+    revCurr = Math.min(reviewData.length - vis, revCurr + 1);
+    renderRev();
+    updateDots();
+  };
+
+  window.addEventListener('resize', () => {
+    vis = getVis();
+    revCurr = 0;
+    renderRev();
+    updateDots();
+  });
+
+  buildReviews();
+  vis = getVis();
+  updateDots();
+  setTimeout(renderRev, 50);
+
+  // Make cart functions globally accessible
+  window.addToCart = addToCart;
+  window.removeItem = removeItem;
+  window.updateQty = updateQty;
+</script>
 </body>
 </html>
