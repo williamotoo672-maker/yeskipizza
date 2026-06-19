@@ -23,6 +23,7 @@
       --red: #c41e3a;
       --red-dark: #a01830;
       --red-light: #fff5f5;
+      --orange: #ff6b00;
     }
 
     html {
@@ -72,14 +73,25 @@
     }
 
     .logo {
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: white;
-      font-family: 'Playfair Display', serif;
+      display: flex;
+      align-items: center;
+      gap: 12px;
       text-decoration: none;
     }
 
-    /* DESKTOP MENU */
+    .logo-text {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: white;
+      font-family: 'Playfair Display', serif;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      letter-spacing: 2px;
+    }
+
+    .logo-text span {
+      color: var(--red);
+    }
+
     .nav-links {
       display: flex;
       list-style: none;
@@ -93,88 +105,103 @@
       font-size: 0.95rem;
       transition: 0.3s;
       cursor: pointer;
+      padding: 8px 0;
     }
 
     .nav-links a:hover {
       color: var(--red);
     }
 
-    /* HAMBURGER BUTTON */
-    .hamburger {
+    /* ===== MOBILE - Name on Left, Logo on Right ===== */
+    .mobile-name-left {
       display: none;
-      background: white;
-      border: none;
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      font-size: 1.8rem;
+      font-weight: 700;
+      color: white;
+      font-family: 'Playfair Display', serif;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      letter-spacing: 1px;
+    }
+
+    .mobile-name-left span {
       color: var(--red);
-      cursor: pointer;
-      z-index: 1003;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .mobile-logo-right {
+      display: none;
       align-items: center;
       justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .mobile-logo-right svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.25));
     }
 
     /* MOBILE STYLES */
     @media (max-width: 768px) {
-      .hamburger {
-        display: flex;
+      .navbar {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 18px;
+        border-radius: 30px;
+        gap: 10px;
       }
 
-      .nav-links {
-        position: fixed;
-        top: 0;
-        right: -300px;
-        width: 280px;
-        height: 100vh;
-        background: white;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-        padding: 100px 30px 30px 30px;
-        margin: 0;
-        gap: 0;
-        transition: right 0.3s ease;
-        z-index: 1002;
-        box-shadow: -5px 0 30px rgba(0,0,0,0.2);
-      }
-
-      .nav-links.show {
-        right: 0;
-      }
-
-      .nav-links li {
-        width: 100%;
-        border-bottom: 1px solid #eee;
-        list-style: none;
-      }
-
-      .nav-links a {
-        color: var(--red);
-        font-size: 1.2rem;
-        padding: 15px 0;
-        display: block;
-        font-weight: 600;
-      }
-
-      .nav-links a:hover {
-        padding-left: 10px;
-        background: var(--red-light);
-      }
-
-      .menu-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.5);
-        z-index: 1001;
+      /* Hide desktop text logo */
+      .logo-text {
         display: none;
       }
 
-      .menu-overlay.show {
+      /* Show name on left - ONLY ONE NAME */
+      .mobile-name-left {
+        display: block;
+        font-size: 1.6rem;
+        letter-spacing: 1.5px;
+      }
+
+      /* Show logo on right */
+      .mobile-logo-right {
+        display: flex;
+        width: 48px;
+        height: 48px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .navbar {
+        padding: 8px 14px;
+      }
+
+      .mobile-name-left {
+        font-size: 1.4rem;
+        letter-spacing: 1px;
+      }
+
+      .mobile-logo-right {
+        width: 42px;
+        height: 42px;
+      }
+    }
+
+    /* Desktop - hide mobile elements */
+    @media (min-width: 769px) {
+      .mobile-name-left {
+        display: none !important;
+      }
+
+      .mobile-logo-right {
+        display: none !important;
+      }
+
+      .logo-text {
         display: block;
       }
     }
@@ -686,9 +713,6 @@
 </head>
 <body>
 
-<!-- MENU OVERLAY -->
-<div id="menuOverlay" class="menu-overlay"></div>
-
 <!-- HERO SECTION -->
 <header class="hero" id="home">
   <video autoplay muted loop playsinline>
@@ -697,15 +721,85 @@
   <div class="hero-overlay"></div>
 
   <nav class="navbar">
-    <a href="#home" class="logo">YESKI PIZZA</a>
-    <button class="hamburger" id="hamburgerBtn">☰</button>
+    <!-- Left side: Mobile Name (on small screens) + Desktop Text (on large screens) -->
+    <a href="#home" class="logo">
+      <!-- DESKTOP LOGO - Text only -->
+      <span class="logo-text">YESKI <span>PIZZA</span></span>
+      
+      <!-- MOBILE NAME - Left side (only shows on small screens) -->
+      <span class="mobile-name-left">YESKI <span>PIZZA</span></span>
+    </a>
+
+    <!-- Navigation links (hidden on mobile) -->
     <ul class="nav-links" id="navLinks">
-      <li><a href="#home">Home</a></li>
-      <li><a href="#menu-section">Menu</a></li>
-      <li><a href="#reviews">Reviews</a></li>
-      <li><a href="#map">Location</a></li>
-      <li><a href="#" id="orderNavBtn">Order Now</a></li>
+      <li><a href="#home" class="nav-link">Home</a></li>
+      <li><a href="#menu-section" class="nav-link">Menu</a></li>
+      <li><a href="#reviews" class="nav-link">Reviews</a></li>
+      <li><a href="#map" class="nav-link">Location</a></li>
+      <li><a href="#" class="nav-link" id="orderNavBtn">Order Now</a></li>
     </ul>
+
+    <!-- MOBILE LOGO - Right side (only shows on small screens) -->
+    <div class="mobile-logo-right">
+      <svg viewBox="0 0 500 350" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <clipPath id="mobileLogoShape">
+            <path d="
+              M70 20
+              L330 20
+              L330 45
+              L390 45
+              L390 20
+              L440 20
+              L470 160
+              L430 180
+              L430 250
+              L310 250
+              L310 210
+              L210 210
+              L210 250
+              L90 250
+              L90 180
+              L50 180
+              L50 70
+              L70 70
+              Z"/>
+          </clipPath>
+        </defs>
+        <!-- Replace href with your actual logo image path -->
+        <image
+          href="https://placehold.co/500x350/c41e3a/white?text=YESKI"
+          width="500"
+          height="350"
+          clip-path="url(#mobileLogoShape)"
+          preserveAspectRatio="xMidYMid slice"/>
+        <path
+          d="
+            M70 20
+            L330 20
+            L330 45
+            L390 45
+            L390 20
+            L440 20
+            L470 160
+            L430 180
+            L430 250
+            L310 250
+            L310 210
+            L210 210
+            L210 250
+            L90 250
+            L90 180
+            L50 180
+            L50 70
+            L70 70
+            Z"
+          fill="none"
+          stroke="#ff6b00"
+          stroke-width="6"
+          stroke-linejoin="round"/>
+      </svg>
+    </div>
   </nav>
 
   <div class="hero-content">
@@ -774,13 +868,11 @@
   <!-- MODERN ORDER MODAL -->
   <div id="orderModal" class="order-modal">
     <div class="modal-content">
-      <!-- Header -->
       <div class="modal-header">
         <h2>Your Order</h2>
         <span class="close-modal" id="closeModalBtn">×</span>
       </div>
 
-      <!-- Cart Items -->
       <div class="cart-items-list" id="cartItemsList">
         <div class="empty-cart">
           <i class="fas fa-shopping-bag"></i>
@@ -789,13 +881,11 @@
         </div>
       </div>
 
-      <!-- Cart Total -->
       <div class="cart-total">
         <span class="total-label">Total</span>
         <span class="total-amount" id="cartTotal">GHS 0</span>
       </div>
 
-      <!-- Size Selector -->
       <label class="size-selector-label">Select Pizza Size</label>
       <div class="size-selector" id="sizeSelector">
         <div class="size-option" data-size="Large" data-price="0">
@@ -812,7 +902,6 @@
         </div>
       </div>
 
-      <!-- Delivery Details -->
       <label class="form-section-title">Delivery Details</label>
       <form id="orderForm" class="order-form">
         <input type="text" id="customerName" placeholder="Full Name" required>
@@ -911,27 +1000,19 @@
       opt.dataset.price = price;
       opt.querySelector('.size-price').textContent = `GHS ${price}`;
     });
-    // Update selected size
     const activeSize = document.querySelector('.size-option.active');
     if (activeSize) {
       selectedSize = activeSize.dataset.size;
     }
-    // Update cart prices to match new size selection
     updateCartPrices();
     renderCart();
   }
 
-  // ========== UPDATE CART PRICES WHEN SIZE CHANGES ==========
   function updateCartPrices() {
     const activeSize = document.querySelector('.size-option.active');
     if (!activeSize) return;
     const newSize = activeSize.dataset.size;
-    const newPrice = parseInt(activeSize.dataset.price) || 0;
-
     cart.forEach(item => {
-      // Only update items that don't have a size assigned or match the new size
-      // Actually, we want to update ALL items to use the new size's price
-      // But we need to know which pizza it is to get the correct price
       const pizzaData = menuItems.find(p => p.id === item.id);
       if (pizzaData) {
         const updatedPrice = pizzaData.prices[newSize] || pizzaData.prices.Small;
@@ -945,7 +1026,6 @@
   document.getElementById('nextBtn').onclick = () => goToSlide((currentSlide + 1) % menuItems.length);
   updateSlider();
 
-  // Start autoplay
   function startAutoplay() {
     if (autoSlide) clearInterval(autoSlide);
     autoSlide = setInterval(() => goToSlide((currentSlide + 1) % menuItems.length), 4000);
@@ -960,17 +1040,16 @@
 
   startAutoplay();
 
-  // Pause autoplay on slider hover
   document.querySelector('.slider-container').addEventListener('mouseenter', stopAutoplay);
   document.querySelector('.slider-container').addEventListener('mouseleave', startAutoplay);
 
-  // ========== SIZE SELECTOR - UPDATE CART PRICES ==========
+  // ========== SIZE SELECTOR ==========
   document.querySelectorAll('.size-option').forEach(opt => {
     opt.addEventListener('click', function() {
       document.querySelectorAll('.size-option').forEach(o => o.classList.remove('active'));
       this.classList.add('active');
       selectedSize = this.dataset.size;
-      updateCartPrices(); // <-- FIX: Update all cart item prices
+      updateCartPrices();
       renderCart();
     });
   });
@@ -1068,10 +1147,10 @@
       return false;
     }
 
-    let message = ' YESKI PIZZA ORDER \n\n';
-    message += ` Customer: ${name}\n`;
-    message += ` Location: ${location}\n`;
-    message += ` Notes: ${special || 'None'}\n\n`;
+    let message = '🍕 YESKI PIZZA ORDER 🍕\n\n';
+    message += `👤 Customer: ${name}\n`;
+    message += `📍 Location: ${location}\n`;
+    message += `📝 Notes: ${special || 'None'}\n\n`;
     message += '━━━ YOUR ORDER ━━━\n';
 
     let total = 0;
@@ -1080,10 +1159,10 @@
       total += item.price * item.quantity;
     });
 
-    message += `\n TOTAL: GHS ${total}`;
-    message += '\n\n Call us: 059 559 0891';
-    message += '\n Location: Obuasi, Ghana';
-    message += '\n\nThank you for ordering from Yeski Pizza! ';
+    message += `\n💰 TOTAL: GHS ${total}`;
+    message += '\n\n📞 Call us: 059 559 0891';
+    message += '\n📍 Location: Obuasi, Ghana';
+    message += '\n\nThank you for ordering from Yeski Pizza! 🔥';
 
     const phone = '233595590891';
     window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
@@ -1129,59 +1208,11 @@
 
   document.getElementById('orderFromMenuBtn')?.addEventListener('click', () => {
     addToCart(menuItems[currentSlide].id);
-    // Show feedback
     const btn = document.getElementById('orderFromMenuBtn');
     btn.innerHTML = '<i class="fas fa-check"></i><span>ADDED!</span>';
     setTimeout(() => {
       btn.innerHTML = '<i class="fas fa-shopping-bag"></i><span>ORDER NOW</span><i class="fas fa-arrow-right"></i>';
     }, 1000);
-  });
-
-  // ========== HAMBURGER MENU ==========
-  const hamburger = document.getElementById('hamburgerBtn');
-  const mobileMenu = document.getElementById('navLinks');
-  const overlay = document.getElementById('menuOverlay');
-
-  function openMenu() {
-    mobileMenu.classList.add('show');
-    overlay.classList.add('show');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeMenu() {
-    mobileMenu.classList.remove('show');
-    overlay.classList.remove('show');
-    document.body.style.overflow = '';
-  }
-
-  hamburger?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    if (mobileMenu.classList.contains('show')) {
-      closeMenu();
-    } else {
-      openMenu();
-    }
-  });
-
-  overlay?.addEventListener('click', closeMenu);
-
-  document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', function(e) {
-      const href = this.getAttribute('href');
-      if (href === '#') {
-        e.preventDefault();
-        document.getElementById('orderFromMenuBtn').click();
-      } else if (href && href !== '#') {
-        e.preventDefault();
-        const target = document.querySelector(href);
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-      closeMenu();
-    });
-  });
-
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 768) closeMenu();
   });
 
   // Hero buttons
@@ -1193,6 +1224,23 @@
   document.querySelector('.hero-content .btn-secondary')?.addEventListener('click', (e) => {
     e.preventDefault();
     document.querySelector('#map').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  // Navigation links - smooth scroll
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === '#') {
+        e.preventDefault();
+        document.getElementById('orderFromMenuBtn').click();
+      } else if (href && href !== '#') {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    });
   });
 
   // ========== REVIEWS ==========
