@@ -112,14 +112,14 @@
       color: var(--red);
     }
 
-    /* ===== MOBILE - Name on Left, Logo on Right ===== */
+    /* ===== MOBILE - Name on Left, Irregular SVG Logo on Right ===== */
     .mobile-name-left {
       display: none;
       font-weight: 700;
       color: white;
       font-family: 'Playfair Display', serif;
       text-shadow: 0 2px 8px rgba(0,0,0,0.3);
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
     }
 
     .mobile-name-left span {
@@ -140,7 +140,7 @@
       filter: drop-shadow(0 4px 12px rgba(0,0,0,0.25));
     }
 
-    /* MOBILE STYLES */
+    /* MOBILE STYLES - Bigger sizes */
     @media (max-width: 768px) {
       .navbar {
         flex-direction: row;
@@ -148,7 +148,7 @@
         align-items: center;
         padding: 10px 18px;
         border-radius: 30px;
-        gap: 10px;
+        gap: 12px;
       }
 
       /* Hide desktop text logo */
@@ -156,18 +156,18 @@
         display: none;
       }
 
-      /* Show name on left - ONLY ONE NAME */
+      /* Show name on left - BIGGER */
       .mobile-name-left {
         display: block;
-        font-size: 1.6rem;
-        letter-spacing: 1.5px;
+        font-size: 2rem;
+        letter-spacing: 2px;
       }
 
-      /* Show logo on right */
+      /* Show irregular SVG logo on right - BIGGER */
       .mobile-logo-right {
         display: flex;
-        width: 48px;
-        height: 48px;
+        width: 60px;
+        height: 60px;
       }
 
       .nav-links {
@@ -178,16 +178,17 @@
     @media (max-width: 480px) {
       .navbar {
         padding: 8px 14px;
+        gap: 8px;
       }
 
       .mobile-name-left {
-        font-size: 1.4rem;
+        font-size: 1.6rem;
         letter-spacing: 1px;
       }
 
       .mobile-logo-right {
-        width: 42px;
-        height: 42px;
+        width: 50px;
+        height: 50px;
       }
     }
 
@@ -321,12 +322,28 @@
     .dot { width: 10px; height: 10px; border-radius: 50%; background: #ccc; border: none; cursor: pointer; }
     .dot.active { background: var(--red); width: 28px; border-radius: 6px; }
 
+    /* MAP SECTION */
     .map-section { padding: 5rem 0; background: white; text-align: center; }
-    .map-container { max-width: 1100px; margin: 0 auto; border-radius: 32px; border: 4px solid var(--red); background: #f5f5f5; min-height: 300px; display: flex; align-items: center; justify-content: center; }
-    .map-placeholder { padding: 3rem; text-align: center; }
-    .map-placeholder i { font-size: 3rem; color: var(--red); margin-bottom: 1rem; display: block; }
+    .map-container { 
+      max-width: 1100px; 
+      margin: 0 auto; 
+      border-radius: 32px; 
+      border: 4px solid var(--red); 
+      overflow: hidden;
+      background: #f5f5f5; 
+      min-height: 300px; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+    }
+    .map-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
     .address-info { margin-top: 1.5rem; display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
     .address-card { background: var(--red-light); padding: 1rem 2rem; border-radius: 60px; display: inline-flex; align-items: center; gap: 12px; border: 1px solid var(--red); }
+    .address-card i { color: var(--red); }
 
     .reviews-section { background: #fff; padding: 5rem 0; text-align: center; }
     .review-card { flex: 0 0 calc((100% - 72px) / 4); border-radius: 28px; padding: 24px; min-height: 340px; }
@@ -739,7 +756,7 @@
       <li><a href="#" class="nav-link" id="orderNavBtn">Order Now</a></li>
     </ul>
 
-    <!-- MOBILE LOGO - Right side (only shows on small screens) -->
+    <!-- MOBILE LOGO - Irregular SVG on Right side (only shows on small screens) -->
     <div class="mobile-logo-right">
       <svg viewBox="0 0 500 350" preserveAspectRatio="xMidYMid meet">
         <defs>
@@ -768,7 +785,7 @@
         </defs>
         <!-- Replace href with your actual logo image path -->
         <image
-          href="https://placehold.co/500x350/c41e3a/white?text=YESKI"
+          href="images/logo.jpeg"
           width="500"
           height="350"
           clip-path="url(#mobileLogoShape)"
@@ -837,15 +854,12 @@
     </div>
   </section>
 
+  <!-- MAP SECTION -->
   <section id="map" class="map-section">
     <div class="main-container">
       <h2>Find <span>Us</span></h2>
       <div class="map-container">
-        <div class="map-placeholder">
-          <i class="fas fa-map-marked-alt"></i>
-          <h3>Map Placeholder</h3>
-          <p>Paste your Google Maps iframe code here</p>
-        </div>
+        <img src="images/map.png" alt="Yeski Pizza Location Map">
       </div>
       <div class="address-info">
         <div class="address-card"><i class="fas fa-map-marker-alt"></i><span>Plot 75, Adumurah Bossman Street, Obuasi, Ghana</span></div>
