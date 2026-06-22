@@ -75,7 +75,6 @@
     .logo {
       display: flex;
       align-items: center;
-      gap: 12px;
       text-decoration: none;
     }
 
@@ -112,43 +111,29 @@
       color: var(--red);
     }
 
-    /* ===== MOBILE - Name on Left, Irregular SVG Logo on Right ===== */
-    .mobile-name-left {
+    /* ===== MOBILE - Only Name "YESKI PIZZA" ===== */
+    .mobile-name {
       display: none;
       font-weight: 700;
       color: white;
       font-family: 'Playfair Display', serif;
       text-shadow: 0 2px 8px rgba(0,0,0,0.3);
-      letter-spacing: 1.5px;
+      letter-spacing: 2px;
     }
 
-    .mobile-name-left span {
+    .mobile-name span {
       color: var(--red);
     }
 
-    .mobile-logo-right {
-      display: none;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .mobile-logo-right svg {
-      width: 100%;
-      height: 100%;
-      display: block;
-      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.25));
-    }
-
-    /* MOBILE STYLES - Bigger sizes */
+    /* MOBILE STYLES */
     @media (max-width: 768px) {
       .navbar {
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
-        padding: 10px 18px;
+        padding: 12px 18px;
         border-radius: 30px;
-        gap: 12px;
+        gap: 10px;
       }
 
       /* Hide desktop text logo */
@@ -156,18 +141,12 @@
         display: none;
       }
 
-      /* Show name on left - BIGGER */
-      .mobile-name-left {
+      /* Show name only - centered */
+      .mobile-name {
         display: block;
-        font-size: 2rem;
+        font-size: 2.2rem;
         letter-spacing: 2px;
-      }
-
-      /* Show irregular SVG logo on right - BIGGER */
-      .mobile-logo-right {
-        display: flex;
-        width: 60px;
-        height: 60px;
+        text-align: center;
       }
 
       .nav-links {
@@ -177,28 +156,18 @@
 
     @media (max-width: 480px) {
       .navbar {
-        padding: 8px 14px;
-        gap: 8px;
+        padding: 10px 14px;
       }
 
-      .mobile-name-left {
-        font-size: 1.6rem;
-        letter-spacing: 1px;
-      }
-
-      .mobile-logo-right {
-        width: 50px;
-        height: 50px;
+      .mobile-name {
+        font-size: 1.8rem;
+        letter-spacing: 1.5px;
       }
     }
 
     /* Desktop - hide mobile elements */
     @media (min-width: 769px) {
-      .mobile-name-left {
-        display: none !important;
-      }
-
-      .mobile-logo-right {
+      .mobile-name {
         display: none !important;
       }
 
@@ -738,13 +707,12 @@
   <div class="hero-overlay"></div>
 
   <nav class="navbar">
-    <!-- Left side: Mobile Name (on small screens) + Desktop Text (on large screens) -->
     <a href="#home" class="logo">
       <!-- DESKTOP LOGO - Text only -->
       <span class="logo-text">YESKI <span>PIZZA</span></span>
       
-      <!-- MOBILE NAME - Left side (only shows on small screens) -->
-      <span class="mobile-name-left">YESKI <span>PIZZA</span></span>
+      <!-- MOBILE NAME - Only shows on small screens -->
+      <span class="mobile-name">YESKI <span>PIZZA</span></span>
     </a>
 
     <!-- Navigation links (hidden on mobile) -->
@@ -755,68 +723,6 @@
       <li><a href="#map" class="nav-link">Location</a></li>
       <li><a href="#" class="nav-link" id="orderNavBtn">Order Now</a></li>
     </ul>
-
-    <!-- MOBILE LOGO - Irregular SVG on Right side (only shows on small screens) -->
-    <div class="mobile-logo-right">
-      <svg viewBox="0 0 500 350" preserveAspectRatio="xMidYMid meet">
-        <defs>
-          <clipPath id="mobileLogoShape">
-            <path d="
-              M70 20
-              L330 20
-              L330 45
-              L390 45
-              L390 20
-              L440 20
-              L470 160
-              L430 180
-              L430 250
-              L310 250
-              L310 210
-              L210 210
-              L210 250
-              L90 250
-              L90 180
-              L50 180
-              L50 70
-              L70 70
-              Z"/>
-          </clipPath>
-        </defs>
-        <!-- Replace href with your actual logo image path -->
-        <image
-          href="images/logo.jpeg"
-          width="500"
-          height="350"
-          clip-path="url(#mobileLogoShape)"
-          preserveAspectRatio="xMidYMid slice"/>
-        <path
-          d="
-            M70 20
-            L330 20
-            L330 45
-            L390 45
-            L390 20
-            L440 20
-            L470 160
-            L430 180
-            L430 250
-            L310 250
-            L310 210
-            L210 210
-            L210 250
-            L90 250
-            L90 180
-            L50 180
-            L50 70
-            L70 70
-            Z"
-          fill="none"
-          stroke="#ff6b00"
-          stroke-width="6"
-          stroke-linejoin="round"/>
-      </svg>
-    </div>
   </nav>
 
   <div class="hero-content">
