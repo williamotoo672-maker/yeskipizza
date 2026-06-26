@@ -490,28 +490,15 @@
 
     /* MAP SECTION */
     .map-section {
-      padding: 80px 40px 80px;
+      padding: 5rem 0 2.5rem;
       background: var(--red-light);
+      text-align: center;
       position: relative;
       overflow: hidden;
     }
     .map-section .main-container {
       position: relative;
       z-index: 2;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .map-section h2 {
-      font-size: clamp(28px, 4vw, 46px);
-      font-weight: 900;
-      color: var(--red);
-      margin-bottom: 30px;
-      font-style: italic;
-      font-family: 'Playfair Display', serif;
-      text-align: center;
-    }
-    .map-section h2 span {
-      color: var(--red);
     }
     .map-container { 
       max-width: 500px; 
@@ -535,44 +522,22 @@
       display: block;
     }
     .address-info { margin-top: 1.5rem; display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
-    .address-card { background: white; padding: 0.8rem 1.8rem; border-radius: 60px; display: inline-flex; align-items: center; gap: 12px; border: 1px solid var(--red); font-size: 0.9rem; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+    .address-card { background: var(--red-light); padding: 0.8rem 1.8rem; border-radius: 60px; display: inline-flex; align-items: center; gap: 12px; border: 1px solid var(--red); font-size: 0.9rem; }
     .address-card i { color: var(--red); }
 
-    /* REVIEWS SECTION */
     .reviews-section {
-      padding: 80px 40px 80px;
       background: var(--red-light);
+      padding: 2.5rem 0 5rem;
+      text-align: center;
       position: relative;
       overflow: hidden;
     }
-    .reviews-section .section-title {
-      font-size: clamp(28px, 4vw, 46px);
-      font-weight: 900;
-      color: var(--red);
-      margin-bottom: 16px;
-      font-style: italic;
-      font-family: 'Playfair Display', serif;
-      text-align: center;
-    }
-    .rating-row {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    .rating-row .stars {
-      color: #f5a623;
-      font-size: 1.5rem;
-      letter-spacing: 4px;
-    }
-    .rating-row .rating-score {
-      font-weight: 800;
-      font-size: 1.3rem;
-      color: #1a1a1a;
-      margin-left: 8px;
-    }
-    .rating-row .rating-count {
-      color: #888;
-      font-size: 0.9rem;
-      margin-left: 4px;
+    .reviews-section .section-title,
+    .reviews-section .rating-row,
+    .reviews-section .slider-wrapper,
+    .reviews-section .review-dots {
+      position: relative;
+      z-index: 2;
     }
     .review-card { flex: 0 0 calc((100% - 72px) / 4); border-radius: 28px; padding: 24px; min-height: 340px; }
     .review-card.red { background: #c41e3a; }
@@ -588,12 +553,12 @@
     .card-handle { font-weight: 800; color: white; display: block; }
     .card-platform { font-size: 11px; color: rgba(255,255,255,0.8); }
 
-    .slider-wrapper { display: flex; align-items: center; max-width: 1300px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 2; }
-    .review-nav-btn { width: 48px; height: 48px; border-radius: 50%; border: 1px solid #ddd; background: #fff; cursor: pointer; font-size: 24px; transition: all 0.3s ease; flex-shrink: 0; }
+    .slider-wrapper { display: flex; align-items: center; max-width: 1300px; margin: 0 auto; padding: 0 20px; }
+    .review-nav-btn { width: 48px; height: 48px; border-radius: 50%; border: 1px solid #ddd; background: #fff; cursor: pointer; font-size: 24px; transition: all 0.3s ease; }
     .review-nav-btn:hover { border-color: var(--red); color: var(--red); background: var(--red-light); }
     .slider-viewport { flex: 1; overflow: hidden; margin: 0 14px; }
     .slider-track { display: flex; gap: 24px; transition: transform 0.45s ease; }
-    .review-dots { display: flex; justify-content: center; gap: 8px; margin-top: 36px; position: relative; z-index: 2; }
+    .review-dots { display: flex; justify-content: center; gap: 8px; margin-top: 36px; }
     .review-dot { width: 10px; height: 10px; border-radius: 50%; background: #ccc; cursor: pointer; transition: all 0.3s ease; }
     .review-dot.active { background: #1a1a1a; width: 28px; border-radius: 6px; }
 
@@ -982,9 +947,7 @@
     }
 
     @media (max-width: 560px) {
-      .menu-section,
-      .map-section,
-      .reviews-section {
+      .menu-section {
         padding: 30px 16px 50px;
       }
       .deco-arrow {
@@ -1029,21 +992,6 @@
         max-width: 300px;
         min-height: 150px;
         max-height: 300px;
-      }
-      .slider-wrapper {
-        padding: 0 10px;
-      }
-      .review-nav-btn {
-        width: 36px;
-        height: 36px;
-        font-size: 18px;
-      }
-      .address-info {
-        gap: 10px;
-      }
-      .address-card {
-        font-size: 0.75rem;
-        padding: 0.5rem 1rem;
       }
     }
   </style>
@@ -1121,6 +1069,9 @@
             <div class="pizza-name" id="pizzaName"><span id="nameText">Palemo</span></div>
             <div class="pizza-tagline-slider" id="taglineText">Chicken, Beef, Pepperoni</div>
             <div class="pizza-prices-slider" id="pricesText">
+              <span>Large GHS 70</span>
+              <span>Medium GHS 60</span>
+              <span>Small GHS 50</span>
             </div>
             <p class="pizza-desc" id="pizzaDesc">A delicious blend of chicken, beef, and pepperoni with our signature sauce.</p>
             <button class="order-btn" id="orderFromMenuBtn">ORDER NOW</button>
@@ -1140,20 +1091,21 @@
         <span>FIND US</span>
         <span>FIND US</span>
       </div>
+
       <div class="blob-wrap">
-        <div class="blob" style="width:200px;height:200px;top:5%;left:2%;"></div>
-        <div class="blob" style="width:140px;height:140px;top:30%;left:8%;"></div>
-        <div class="blob" style="width:100px;height:100px;top:60%;left:4%;"></div>
-        <div class="blob" style="width:160px;height:160px;bottom:5%;right:3%;"></div>
-        <div class="blob" style="width:120px;height:120px;top:15%;right:6%;"></div>
+        <div class="blob" style="width:180px;height:180px;top:8%;left:4%;"></div>
+        <div class="blob" style="width:120px;height:120px;top:55%;left:10%;"></div>
+        <div class="blob" style="width:150px;height:150px;bottom:8%;right:5%;"></div>
+        <div class="blob" style="width:100px;height:100px;top:20%;right:8%;"></div>
       </div>
+
       <div class="main-container">
-        <h2 class="reveal">Find <span>Us</span></h2>
+        <h2 class="section-title reveal">FIND US</h2>
         <div class="map-container reveal">
           <img src="images/map.png" alt="Yeski Pizza Location Map">
         </div>
         <div class="address-info reveal">
-          <div class="address-card"><i class="fas fa-map-marker-alt"></i><span>Plot 75, Adumurah Bossman Street, Obuasi, Ghana</span></div>
+          <div class="address-card"><i class="fas fa-map-marker-alt"></i><span>Plot 75, Raspberry Street, Obuasi, Ghana</span></div>
           <div class="address-card"><i class="fas fa-clock"></i><span>Mon-Sun: 11am - 10pm</span></div>
         </div>
       </div>
@@ -1168,13 +1120,14 @@
         <span>REVIEWS</span>
         <span>REVIEWS</span>
       </div>
+
       <div class="blob-wrap">
-        <div class="blob" style="width:200px;height:200px;top:5%;left:2%;"></div>
-        <div class="blob" style="width:140px;height:140px;top:30%;left:8%;"></div>
-        <div class="blob" style="width:100px;height:100px;top:60%;left:4%;"></div>
-        <div class="blob" style="width:160px;height:160px;bottom:5%;right:3%;"></div>
-        <div class="blob" style="width:120px;height:120px;top:15%;right:6%;"></div>
+        <div class="blob" style="width:160px;height:160px;top:10%;left:3%;"></div>
+        <div class="blob" style="width:110px;height:110px;top:50%;left:7%;"></div>
+        <div class="blob" style="width:140px;height:140px;bottom:10%;right:4%;"></div>
+        <div class="blob" style="width:90px;height:90px;top:25%;right:9%;"></div>
       </div>
+
       <div class="section-title reveal">What our customers have to say</div>
       <div class="rating-row reveal"><div class="stars">★★★★★</div><span class="rating-score">4.9</span><span class="rating-count">(29K+ reviews)</span></div>
       <div class="slider-wrapper reveal">
@@ -1206,19 +1159,18 @@
           <span class="total-amount" id="cartTotal">GHS 0</span>
         </div>
 
-        <!-- Size Selector -->
         <label class="size-selector-label">Select Pizza Size</label>
         <div class="size-selector" id="sizeSelector">
           <div class="size-option" data-size="Large" data-price="0">
-            <span class="size-label">🍕 Large</span>
+            <span class="size-label">Large</span>
             <span class="size-price">GHS 0</span>
           </div>
           <div class="size-option" data-size="Medium" data-price="0">
-            <span class="size-label">🍕 Medium</span>
+            <span class="size-label">Medium</span>
             <span class="size-price">GHS 0</span>
           </div>
           <div class="size-option active" data-size="Small" data-price="0">
-            <span class="size-label">🍕 Small</span>
+            <span class="size-label">Small</span>
             <span class="size-price">GHS 0</span>
           </div>
         </div>
@@ -1382,38 +1334,46 @@
       });
     }
 
-    // ========== SIZE SELECTOR - UPDATES selectedSize ==========
-    // FIX: Use event delegation to ensure clicks work even with emojis
-    document.getElementById('sizeSelector').addEventListener('click', function(e) {
-      // Find the closest size-option element that was clicked
-      const option = e.target.closest('.size-option');
-      if (!option) return;
-      
-      // Remove active from all
-      document.querySelectorAll('.size-option').forEach(o => {
-        o.classList.remove('active');
-        o.style.borderColor = '#e8e8e8';
-        o.style.background = '#fafafa';
-        o.style.color = '#1a1a1a';
-        const sp = o.querySelector('.size-price');
-        if (sp) sp.style.color = '#666';
+    // ========== SIZE SELECTOR - UPDATES PRICE FOR THE CURRENT PIZZA'S CART ITEM ==========
+    document.querySelectorAll('.size-option').forEach(opt => {
+      opt.addEventListener('click', function() {
+        // Update active state
+        document.querySelectorAll('.size-option').forEach(o => {
+          o.classList.remove('active');
+          o.style.borderColor = '#e8e8e8';
+          o.style.background = '#fafafa';
+          o.style.color = '#1a1a1a';
+          const sp = o.querySelector('.size-price');
+          if (sp) sp.style.color = '#666';
+        });
+        this.classList.add('active');
+        this.style.borderColor = '#c41e3a';
+        this.style.background = '#c41e3a';
+        this.style.color = 'white';
+        const sp = this.querySelector('.size-price');
+        if (sp) sp.style.color = 'rgba(255,255,255,0.85)';
+
+        // This size becomes the default for the next NEW pizza added
+        selectedSize = this.dataset.size;
+
+        // Also update the price/size of whichever cart item belongs to the
+        // pizza currently shown in the slider, so picking a size while the
+        // order modal is open actually changes that item's price right away.
+        const item = pizzas[current];
+        if (item) {
+          const newSize = this.dataset.size;
+          const newPrice = item.prices[newSize] || item.prices.Small;
+          const cartEntry = cart.find(c => c.pizzaId === current);
+          if (cartEntry) {
+            cartEntry.size = newSize;
+            cartEntry.lockedSize = newSize;
+            cartEntry.price = newPrice;
+            cartEntry.lockedPrice = newPrice;
+          }
+        }
+
+        renderCart();
       });
-      
-      // Add active to clicked
-      option.classList.add('active');
-      option.style.borderColor = '#c41e3a';
-      option.style.background = '#c41e3a';
-      option.style.color = 'white';
-      const sp = option.querySelector('.size-price');
-      if (sp) sp.style.color = 'rgba(255,255,255,0.85)';
-      
-      // CRITICAL: Update selectedSize immediately
-      selectedSize = option.dataset.size;
-      
-      // Debug: log to console to verify
-      console.log('Size selected:', selectedSize);
-      
-      renderCart();
     });
 
     // ========== CART FUNCTIONS ==========
@@ -1421,25 +1381,31 @@
       const item = pizzas[current];
       if (!item) return;
       
-      // CRITICAL FIX: Use selectedSize directly
-      const size = selectedSize;
-      
-      // Read price directly from pizza data
-      const price = item.prices[size] || item.prices.Small || 0;
-      
-      // Debug: log to console
-      console.log('Adding to cart:', item.name, size, price);
+      // Get the active size option
+      const activeSize = document.querySelector('.size-option.active');
+      const size = activeSize ? activeSize.dataset.size : selectedSize;
+      // Always look the price up from the current pizza's own price table.
+      // (Never trust the data-price attribute on the button - it's just a
+      // display cache and can go stale, e.g. if the carousel auto-advances
+      // between renders.)
+      const price = item.prices[size] || item.prices.Small;
 
-      // Create cart item with independent data
-      const cartItem = {
-        id: Date.now() + Math.random(),
-        name: item.name,
-        size: size,
-        price: price,
-        quantity: 1
-      };
+      // Generate a unique ID for this cart item
+      const uniqueId = Date.now() + Math.random();
       
-      cart.push(cartItem);
+      // Add to cart with locked price and size
+      cart.push({ 
+        id: uniqueId,
+        pizzaId: current,
+        name: item.name, 
+        size: size, 
+        price: price, 
+        quantity: 1,
+        // Store the price and size at time of addition - these NEVER change
+        lockedPrice: price,
+        lockedSize: size
+      });
+      
       renderCart();
       
       // Show feedback on button
@@ -1453,13 +1419,13 @@
       }, 1500);
     }
 
-    function removeItem(id) {
-      cart = cart.filter(item => item.id !== id);
+    function removeItem(uniqueId) {
+      cart = cart.filter(item => item.id !== uniqueId);
       renderCart();
     }
 
-    function updateQty(id, delta) {
-      const idx = cart.findIndex(item => item.id === id);
+    function updateQty(uniqueId, delta) {
+      const idx = cart.findIndex(item => item.id === uniqueId);
       if (idx !== -1) {
         cart[idx].quantity += delta;
         if (cart[idx].quantity <= 0) {
@@ -1484,12 +1450,15 @@
       let html = '',
         total = 0;
       cart.forEach((item) => {
-        total += item.price * item.quantity;
+        // Use the locked price - this NEVER changes
+        const itemPrice = item.lockedPrice || item.price;
+        const itemSize = item.lockedSize || item.size;
+        total += itemPrice * item.quantity;
         
         html += `<div class="cart-item">
           <div class="cart-item-details">
             <span class="item-name">${item.name}</span>
-            <span class="item-size">${item.size} • GHS ${item.price} each</span>
+            <span class="item-size">${itemSize} • GHS ${itemPrice} each</span>
           </div>
           <div class="cart-controls">
             <button onclick="updateQty(${item.id}, -1)">−</button>
@@ -1518,13 +1487,15 @@
         return false;
       }
       let message = '🍕 YESKI PIZZA ORDER 🍕\n\n';
-      message += `👤 Customer: ${name}\n📍 Location: ${location}\n📝 Notes: ${special || 'None'}\n\n━━━ YOUR ORDER ━━━\n`;
+      message += `👤 Customer: ${name}\n Location: ${location}\n Notes: ${special || 'None'}\n\n━━━ YOUR ORDER ━━━\n`;
       let total = 0;
       cart.forEach(item => {
-        message += `▸ ${item.name} (${item.size}) x${item.quantity} = GHS ${item.price * item.quantity}\n`;
-        total += item.price * item.quantity;
+        const itemPrice = item.lockedPrice || item.price;
+        const itemSize = item.lockedSize || item.size;
+        message += `▸ ${item.name} (${itemSize}) x${item.quantity} = GHS ${itemPrice * item.quantity}\n`;
+        total += itemPrice * item.quantity;
       });
-      message += `\n💰 TOTAL: GHS ${total}\n\n📞 Call us: 059 559 0891\n📍 Location: Obuasi, Ghana\n\nThank you for ordering from Yeski Pizza! 🔥`;
+      message += `\n TOTAL: GHS ${total}\n\n Call us: 059 559 0891\n Location: Obuasi, Ghana\n\nThank you for ordering from Yeski Pizza! `;
       window.open(`https://wa.me/233595590891?text=${encodeURIComponent(message)}`, '_blank');
       return true;
     }
@@ -1535,23 +1506,39 @@
     function openModal() {
       stopAutoplay();
       updateSizePrices();
+      syncSizeSelectorToCart();
       modal.style.display = 'flex';
       document.body.style.overflow = 'hidden';
       renderCart();
     }
-    
-    function closeModal() {
-      modal.style.display = 'none';
-      document.body.style.overflow = '';
-      startAutoplay();
+
+    // Make the active size button reflect whatever size is already in the
+    // cart for the current pizza (falls back to selectedSize if not in cart).
+    function syncSizeSelectorToCart() {
+      const item = pizzas[current];
+      if (!item) return;
+      const cartEntry = cart.find(c => c.pizzaId === current);
+      const sizeToShow = cartEntry ? (cartEntry.lockedSize || cartEntry.size) : selectedSize;
+
+      document.querySelectorAll('.size-option').forEach(opt => {
+        const isMatch = opt.dataset.size === sizeToShow;
+        opt.classList.toggle('active', isMatch);
+        opt.style.borderColor = isMatch ? '#c41e3a' : '#e8e8e8';
+        opt.style.background = isMatch ? '#c41e3a' : '#fafafa';
+        opt.style.color = isMatch ? 'white' : '#1a1a1a';
+        const sp = opt.querySelector('.size-price');
+        if (sp) sp.style.color = isMatch ? 'rgba(255,255,255,0.85)' : '#666';
+      });
     }
     
+    // ORDER NOW button - adds to cart and opens modal
     document.getElementById('orderFromMenuBtn')?.addEventListener('click', (e) => {
       e.preventDefault();
       addToCart();
       openModal();
     });
     
+    // Other ORDER NOW buttons - just open modal
     document.querySelectorAll('#orderNavBtn, #floatingCartBtn').forEach(btn => {
       btn?.addEventListener('click', (e) => {
         e.preventDefault();
@@ -1559,18 +1546,26 @@
       });
     });
     
-    document.getElementById('closeModalBtn')?.addEventListener('click', closeModal);
+    document.getElementById('closeModalBtn')?.addEventListener('click', () => {
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+      startAutoplay();
+    });
     window.addEventListener('click', (e) => {
       if (e.target === modal) {
-        closeModal();
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+        startAutoplay();
       }
     });
     document.getElementById('submitOrderBtn')?.addEventListener('click', (e) => {
       e.preventDefault();
       if (sendOrder()) {
-        closeModal();
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
         cart = [];
         renderCart();
+        startAutoplay();
       }
     });
 
@@ -1661,7 +1656,6 @@
     window.updateQty = updateQty;
     window.selectedSize = selectedSize;
     window.openModal = openModal;
-    window.closeModal = closeModal;
 
     // Initialize slider
     initSlider();
