@@ -1178,6 +1178,7 @@
         <label class="form-section-title">Delivery Details</label>
         <form id="orderForm" class="order-form">
           <input type="text" id="customerName" placeholder="Full Name" required>
+          <input type="tel" id="customerPhone" placeholder="Phone Number" required>
           <input type="text" id="customerLocation" placeholder="Delivery Address / Location" required>
           <textarea id="specialInstructions" rows="2" placeholder="Additional notes (allergies, gate code, etc.)"></textarea>
           <button type="submit" class="submit-order-btn" id="submitOrderBtn">
@@ -1476,10 +1477,11 @@
     // ========== SEND ORDER VIA WHATSAPP ==========
     function sendOrder() {
       const name = document.getElementById('customerName')?.value.trim();
+      const phone = document.getElementById('customerPhone')?.value.trim();
       const location = document.getElementById('customerLocation')?.value.trim();
       const special = document.getElementById('specialInstructions')?.value.trim();
-      if (!name || !location) {
-        alert('Please enter your name and delivery address.');
+      if (!name || !phone || !location) {
+        alert('Please enter your name, phone number, and delivery address.');
         return false;
       }
       if (cart.length === 0) {
@@ -1487,7 +1489,7 @@
         return false;
       }
       let message = '🍕 YESKI PIZZA ORDER 🍕\n\n';
-      message += `👤 Customer: ${name}\n Location: ${location}\n Notes: ${special || 'None'}\n\n━━━ YOUR ORDER ━━━\n`;
+      message += ` Customer: ${name}\n Phone: ${phone}\n Location: ${location}\n Notes: ${special || 'None'}\n\n━━━ YOUR ORDER ━━━\n`;
       let total = 0;
       cart.forEach(item => {
         const itemPrice = item.lockedPrice || item.price;
