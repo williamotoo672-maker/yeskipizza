@@ -500,6 +500,14 @@
       position: relative;
       z-index: 2;
     }
+    .map-section .section-title {
+      font-size: clamp(28px, 4vw, 46px);
+      font-weight: 900;
+      color: var(--red);
+      margin-bottom: 30px;
+      font-style: italic;
+      font-family: 'Playfair Display', serif;
+    }
     .map-container { 
       max-width: 500px; 
       margin: 0 auto; 
@@ -522,7 +530,7 @@
       display: block;
     }
     .address-info { margin-top: 1.5rem; display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
-    .address-card { background: var(--red-light); padding: 0.8rem 1.8rem; border-radius: 60px; display: inline-flex; align-items: center; gap: 12px; border: 1px solid var(--red); font-size: 0.9rem; }
+    .address-card { background: white; padding: 0.8rem 1.8rem; border-radius: 60px; display: inline-flex; align-items: center; gap: 12px; border: 1px solid var(--red); font-size: 0.9rem; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
     .address-card i { color: var(--red); }
 
     .reviews-section {
@@ -950,6 +958,12 @@
       .menu-section {
         padding: 30px 16px 50px;
       }
+      .map-section {
+        padding: 40px 16px 30px;
+      }
+      .reviews-section {
+        padding: 30px 16px 50px;
+      }
       .deco-arrow {
         display: none;
       }
@@ -1100,7 +1114,7 @@
       </div>
 
       <div class="main-container">
-        <h2 class="section-title reveal">FIND US</h2>
+        <h2 class="section-title reveal">Find Us</h2>
         <div class="map-container reveal">
           <img src="images/map.png" alt="Yeski Pizza Location Map">
         </div>
@@ -1182,8 +1196,8 @@
           <input type="text" id="customerLocation" placeholder="Delivery Address / Location" required>
           <textarea id="specialInstructions" rows="2" placeholder="Additional notes (allergies, gate code, etc.)"></textarea>
           <button type="submit" class="submit-order-btn" id="submitOrderBtn">
-            <i class="fab fa-whatsapp"></i>
-            Send Order via WhatsApp
+            <i class="fas fa-sms"></i>
+            Send Order via SMS
           </button>
         </form>
       </div>
@@ -1474,22 +1488,27 @@
       totalEl.textContent = `GHS ${total}`;
     }
 
-    // ========== SEND ORDER VIA WHATSAPP ==========
+    // ========== SEND ORDER VIA SMS ==========
     function sendOrder() {
       const name = document.getElementById('customerName')?.value.trim();
       const phone = document.getElementById('customerPhone')?.value.trim();
       const location = document.getElementById('customerLocation')?.value.trim();
       const special = document.getElementById('specialInstructions')?.value.trim();
+      
       if (!name || !phone || !location) {
         alert('Please enter your name, phone number, and delivery address.');
         return false;
       }
+      
       if (cart.length === 0) {
         alert('Your cart is empty. Please add items to your order.');
         return false;
       }
+      
+      // Build the SMS message
       let message = '🍕 YESKI PIZZA ORDER 🍕\n\n';
-      message += ` Customer: ${name}\n Phone: ${phone}\n Location: ${location}\n Notes: ${special || 'None'}\n\n━━━ YOUR ORDER ━━━\n`;
+      message += `Customer: ${name}\nPhone: ${phone}\nLocation: ${location}\nNotes: ${special || 'None'}\n\n━━━ ORDER ━━━\n`;
+      
       let total = 0;
       cart.forEach(item => {
         const itemPrice = item.lockedPrice || item.price;
@@ -1497,8 +1516,16 @@
         message += `▸ ${item.name} (${itemSize}) x${item.quantity} = GHS ${itemPrice * item.quantity}\n`;
         total += itemPrice * item.quantity;
       });
-      message += `\n TOTAL: GHS ${total}\n\n Call us: 059 559 0891\n Location: Obuasi, Ghana\n\nThank you for ordering from Yeski Pizza! `;
-      window.open(`https://wa.me/233595590891?text=${encodeURIComponent(message)}`, '_blank');
+      
+      message += `\n💰 TOTAL: GHS ${total}\n\n📞 Call us: 059 559 0891\n📍 Obuasi, Ghana\n\nThank you for ordering from Yeski Pizza! 🔥`;
+      
+      // Encode the message for SMS
+      const encodedMessage = encodeURIComponent(message);
+      
+      // Open SMS with the message (works on mobile)
+      // The number is the restaurant's phone number
+      window.open(`sms:0595590891?body=${encodedMessage}`, '_blank');
+      
       return true;
     }
 
