@@ -1506,7 +1506,7 @@
       }
       
       // Build the SMS message
-      let message = '🍕 YESKI PIZZA ORDER 🍕\n\n';
+      let message = ' YESKI PIZZA ORDER \n\n';
       message += `Customer: ${name}\nPhone: ${phone}\nLocation: ${location}\nNotes: ${special || 'None'}\n\n━━━ ORDER ━━━\n`;
       
       let total = 0;
@@ -1517,7 +1517,7 @@
         total += itemPrice * item.quantity;
       });
       
-      message += `\n💰 TOTAL: GHS ${total}\n\n📞 Call us: 059 559 0891\n📍 Obuasi, Ghana\n\nThank you for ordering from Yeski Pizza! 🔥`;
+      message += `\n TOTAL: GHS ${total}\n\n Call us: 059 559 0891\n Obuasi, Ghana\n\nThank you for ordering from Yeski Pizza! `;
       
       // Encode the message for SMS
       const encodedMessage = encodeURIComponent(message);
